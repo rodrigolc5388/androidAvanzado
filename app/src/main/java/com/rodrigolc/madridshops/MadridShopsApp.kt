@@ -1,6 +1,5 @@
 package com.rodrigolc.madridshops
 
-import android.app.Application
 import android.support.multidex.MultiDexApplication
 import android.util.Log
 
