@@ -31,5 +31,4 @@ class GetAllShopsInteractorFakeImpl: GetAllShopsInteractor {
         val shops = Shops(list)
         return shops
     }
-
 }
