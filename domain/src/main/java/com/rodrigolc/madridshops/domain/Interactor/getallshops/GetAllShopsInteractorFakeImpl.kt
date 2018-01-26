@@ -1,7 +1,14 @@
-package com.rodrigolc.madridshops.domain.Interactor
+package com.rodrigolc.madridshops.domain.Interactor.getAllShops
 
+import com.rodrigolc.madridshops.domain.Interactor.ErrorClosure
+import com.rodrigolc.madridshops.domain.Interactor.ErrorCompletion
+import com.rodrigolc.madridshops.domain.Interactor.SuccessClosure
+import com.rodrigolc.madridshops.domain.Interactor.SuccessCompletion
 import com.rodrigolc.madridshops.domain.model.Shop
 import com.rodrigolc.madridshops.domain.model.Shops
+import java.util.*
+
+
 
 
 class GetAllShopsInteractorFakeImpl: GetAllShopsInteractor {
@@ -19,6 +26,22 @@ class GetAllShopsInteractorFakeImpl: GetAllShopsInteractor {
             error.errorCompletion("Error while accessing the Repository")
         }
     }
+
+
+    fun execute(success: SuccessClosure, error: ErrorClosure) {
+        var allOk = true
+
+        // connect to the repository
+
+        if (allOk) {
+            val shops = createFakeListOfShops()
+
+            success(shops)
+        } else {
+            error("Error while accessing the Repository")
+        }
+    }
+
 
     fun createFakeListOfShops(): Shops {
         val list = ArrayList<Shop>()

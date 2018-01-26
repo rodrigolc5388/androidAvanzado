@@ -3,7 +3,7 @@ package com.rodrigolc.madridshops
 import android.support.multidex.MultiDexApplication
 import android.util.Log
 import com.rodrigolc.madridshops.domain.Interactor.ErrorCompletion
-import com.rodrigolc.madridshops.domain.Interactor.GetAllShopsInteractorFakeImpl
+import com.rodrigolc.madridshops.domain.Interactor.getAllShops.GetAllShopsInteractorFakeImpl
 import com.rodrigolc.madridshops.domain.Interactor.SuccessCompletion
 import com.rodrigolc.madridshops.domain.model.Shops
 
