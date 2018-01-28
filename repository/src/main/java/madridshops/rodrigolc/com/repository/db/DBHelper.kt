@@ -4,7 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-fun build(context: Context, name: String, version: Int): DBHelper {
+fun buildDBHelper(context: Context, name: String, version: Int): DBHelper {
     return DBHelper(context, name, null, version)
 }
 
@@ -23,7 +23,26 @@ class DBHelper(context: Context?, name: String?, factory: SQLiteDatabase.CursorF
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        val updateChangesFromv1Tov2 = {
 
+        }
+
+        val updateChangesFromv2Tov3 = {
+
+        }
+
+        if (oldVersion == 1 && newVersion == 2) {
+            updateChangesFromv1Tov2()
+        }
+
+        if (oldVersion == 1 && newVersion == 3) {
+            updateChangesFromv1Tov2()
+            updateChangesFromv2Tov3()
+        }
+
+        if (oldVersion == 2 && newVersion == 3) {
+            updateChangesFromv2Tov3()
+        }
     }
 }
 

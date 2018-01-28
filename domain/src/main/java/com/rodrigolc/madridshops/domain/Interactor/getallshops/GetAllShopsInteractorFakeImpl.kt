@@ -12,11 +12,11 @@ import java.util.*
 
 
 class GetAllShopsInteractorFakeImpl: GetAllShopsInteractor {
+
     override fun execute(success: SuccessCompletion<Shops>, error: ErrorCompletion) {
         var allOk = true
 
         // connect to the repository
-
 
         if (allOk) {
             val shops = createFakeListOfShops()
