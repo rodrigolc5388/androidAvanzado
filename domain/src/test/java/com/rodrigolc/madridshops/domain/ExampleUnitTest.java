@@ -1,4 +1,4 @@
-package com.rodrigolc.madridshops.domain;
+package com.rodrigolc.madridshops;
 
 import org.junit.Test;
 

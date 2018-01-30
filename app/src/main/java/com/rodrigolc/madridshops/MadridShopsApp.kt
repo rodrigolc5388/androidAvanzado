@@ -28,12 +28,11 @@ class MadridShopsApp: MultiDexApplication() {
                 },
                 error = object: ErrorCompletion {
                     override fun errorCompletion(errorMessage: String) {
-
                     }
+                }
+        )
 
-                })
     }
-
 
     override fun onLowMemory() {
         super.onLowMemory()

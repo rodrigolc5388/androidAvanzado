@@ -1,4 +1,4 @@
-package madridshops.rodrigolc.com.madridshops
+package com.rodrigolc.madridshops
 
 import org.junit.Test
 

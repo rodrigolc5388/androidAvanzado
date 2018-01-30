@@ -1,4 +1,4 @@
-package madridshops.rodrigolc.com.repository.db.dao
+package com.rodrigolc.madridshops.repository.db.dao
 
 import android.database.Cursor
 

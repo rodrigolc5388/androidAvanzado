@@ -1,4 +1,4 @@
-package madridshops.rodrigolc.com.repository.model
+package com.rodrigolc.madridshops.repository.model
 
 
 data class  ShopEntity(

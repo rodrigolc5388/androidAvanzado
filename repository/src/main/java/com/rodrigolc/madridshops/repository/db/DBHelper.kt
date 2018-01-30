@@ -1,4 +1,4 @@
-package madridshops.rodrigolc.com.repository.db
+package com.rodrigolc.madridshops.repository.db
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
