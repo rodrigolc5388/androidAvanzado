@@ -1,4 +1,4 @@
-package madridshops.rodrigolc.com.repository
+package com.rodrigolc.repository
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -8,12 +8,6 @@ import com.rodrigolc.madridshops.repository.model.ShopEntity
 import junit.framework.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
-
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * @see [Testing documentation](http://d.android.com/tools/testing)
- */
 
 
 @RunWith(AndroidJUnit4::class)
@@ -41,7 +35,6 @@ class ExampleInstrumentedTest {
                 "",
                 ""
         )
-
 
         val shopEntityDao = ShopDAO(dbHelper)
 
