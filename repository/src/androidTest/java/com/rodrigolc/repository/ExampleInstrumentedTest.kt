@@ -11,7 +11,7 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
+class ShopDAOTests {
 
     // Context of the app under test.
     val appContext = InstrumentationRegistry.getTargetContext()

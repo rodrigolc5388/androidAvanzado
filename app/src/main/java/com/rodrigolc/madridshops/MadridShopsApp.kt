@@ -5,6 +5,7 @@ import android.util.Log
 import com.rodrigolc.madridshops.domain.Interactor.ErrorCompletion
 import com.rodrigolc.madridshops.domain.Interactor.getAllShops.GetAllShopsInteractorFakeImpl
 import com.rodrigolc.madridshops.domain.Interactor.SuccessCompletion
+import com.rodrigolc.madridshops.domain.Interactor.deleteallshops.DeleteAllShopsImpl
 import com.rodrigolc.madridshops.domain.model.Shops
 
 
@@ -31,6 +32,12 @@ class MadridShopsApp: MultiDexApplication() {
                     }
                 }
         )
+
+        DeleteAllShopsImpl(this).execute(success = {
+
+        }, error = {
+
+        })
 
     }
 
