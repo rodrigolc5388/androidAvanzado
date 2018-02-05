@@ -8,12 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.rodrigolc.madridshops.R
+import com.rodrigolc.madridshops.domain.model.Shops
 
 
 /**
  * A simple [Fragment] subclass.
  */
 class MapFragment : Fragment() {
+
+    fun setShops(shops: Shops){
+
+    }
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,

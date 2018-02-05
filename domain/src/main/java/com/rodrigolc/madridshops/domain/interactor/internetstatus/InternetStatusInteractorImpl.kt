@@ -1,7 +1,6 @@
-package com.rodrigolc.madridshops.domain.Interactor.internetstatus
+package com.rodrigolc.madridshops.domain.interactor.internetstatus
 
-import com.rodrigolc.madridshops.domain.Interactor.ErrorClosure
-import com.rodrigolc.madridshops.domain.Interactor.internetStatus.InternetStatusInteractor
+import com.rodrigolc.madridshops.domain.interactor.ErrorClosure
 
 class InternetStatusInteractorImpl : InternetStatusInteractor {
     override fun execute(success: () -> Unit, error: ErrorClosure) {

@@ -17,7 +17,7 @@ class ShopDAOTests {
     val appContext = InstrumentationRegistry.getTargetContext()
 
     // Connection to DB
-    val dbHelper = buildDBHelper(appContext, "mydb.sqlite", 1)
+    private val dbHelper = buildDBHelper(appContext, "mydb.sqlite", 1)
 
     @Test
     @Throws(Exception::class)

@@ -1,4 +1,4 @@
-package com.rodrigolc.madridshops.domain.Interactor
+package com.rodrigolc.madridshops.domain.interactor
 
 
 interface SuccessCompletion<T> {

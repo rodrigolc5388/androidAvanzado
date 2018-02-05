@@ -1,9 +1,9 @@
-package com.rodrigolc.madridshops.domain.Interactor.getallshops
+package com.rodrigolc.madridshops.domain.interactor.getAllShopshops
 
 import android.content.Context
-import com.rodrigolc.madridshops.domain.Interactor.ErrorCompletion
-import com.rodrigolc.madridshops.domain.Interactor.SuccessCompletion
-import com.rodrigolc.madridshops.domain.Interactor.getAllShops.GetAllShopsInteractor
+import com.rodrigolc.madridshops.domain.interactor.ErrorCompletion
+import com.rodrigolc.madridshops.domain.interactor.SuccessCompletion
+import com.rodrigolc.madridshops.domain.interactor.getAllShops.GetAllShopsInteractor
 import com.rodrigolc.madridshops.domain.model.Shop
 import com.rodrigolc.madridshops.domain.model.Shops
 import com.rodrigolc.madridshops.repository.Repository
@@ -37,4 +37,3 @@ private fun entityMapper(list: List<ShopEntity>): Shops {
     val shops = Shops(tempList)
     return shops
 }
-

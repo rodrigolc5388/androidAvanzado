@@ -1,8 +1,8 @@
-package com.rodrigolc.madridshops.domain.Interactor.deleteallshops
+package com.rodrigolc.madridshops.domain.interactor.deleteallshops
 
 import android.content.Context
-import com.rodrigolc.madridshops.domain.Interactor.CodeClosure
-import com.rodrigolc.madridshops.domain.Interactor.ErrorClosure
+import com.rodrigolc.madridshops.domain.interactor.CodeClosure
+import com.rodrigolc.madridshops.domain.interactor.ErrorClosure
 import com.rodrigolc.madridshops.repository.RepositoryImpl
 import java.lang.ref.WeakReference
 

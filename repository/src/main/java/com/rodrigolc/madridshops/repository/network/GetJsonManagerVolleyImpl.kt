@@ -10,7 +10,7 @@ import com.rodrigolc.madridshops.repository.ErrorCompletion
 import com.rodrigolc.madridshops.repository.SuccessCompletion
 import java.lang.ref.WeakReference
 
-class GetJsonManagerVolleyImpl(context: Context): GetJsonManager {
+internal class GetJsonManagerVolleyImpl(context: Context): GetJsonManager {
 
     var weakContext: WeakReference<Context> = WeakReference(context)
     var requestQueue: RequestQueue? = null
