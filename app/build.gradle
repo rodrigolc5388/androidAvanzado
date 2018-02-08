@@ -16,7 +16,7 @@ android {
         multiDexEnabled true
     }
     buildTypes {
-        debug{
+        debug {
             buildConfigField "String", "MADRID_SHOPS_SERVER_URL", "\"http://debug\""
         }
         release {
@@ -41,5 +41,8 @@ dependencies {
     // enabling multidex support to avoid 64k method limit
     // see: https://developer.android.com/studio/build/multidex.html
     implementation 'com.android.support:multidex:1.0.0'
+
+    implementation 'com.google.android.gms:play-services-maps:11.8.0'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 
 }
