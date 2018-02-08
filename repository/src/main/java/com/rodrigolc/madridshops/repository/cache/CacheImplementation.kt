@@ -4,7 +4,7 @@ import android.content.Context
 import com.rodrigolc.madridshops.repository.db.DBHelper
 import com.rodrigolc.madridshops.repository.db.buildDBHelper
 import com.rodrigolc.madridshops.repository.db.dao.ShopDAO
-import com.rodrigolc.madridshops.repository.model.ShopEntity
+import com.rodrigolc.madridshops.repository.model.ShoptivityEntity
 import com.rodrigolc.madridshops.repository.thread.DispatchOnMainThreadRun
 import java.lang.ref.WeakReference
 
@@ -13,7 +13,7 @@ internal class CacheImpl(context: Context): Cache {
 
     val context = WeakReference<Context>(context)
 
-    override fun getAllShops(success: (shops: List<ShopEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
+    override fun getAllShops(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
         Thread(Runnable {
             var shops = ShopDAO(cacheDBHelper()).query()
             DispatchOnMainThreadRun(Runnable {
@@ -26,17 +26,17 @@ internal class CacheImpl(context: Context): Cache {
         }).run()
     }
 
-    override fun saveAllShops(shops: List<ShopEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit) {
+    override fun saveAllShops(shoptivities: List<ShoptivityEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit) {
         Thread(Runnable {
             try {
-                shops.forEach { ShopDAO(cacheDBHelper()).insert(it) }
+                shoptivities.forEach { ShopDAO(cacheDBHelper()).insert(it) }
 
                 DispatchOnMainThreadRun(Runnable {
                     success()
                 })
             } catch(e: Exception) {
                 DispatchOnMainThreadRun(Runnable {
-                        error("Error inserting shops")
+                        error("Error inserting shoptivities")
                 })
             }
 

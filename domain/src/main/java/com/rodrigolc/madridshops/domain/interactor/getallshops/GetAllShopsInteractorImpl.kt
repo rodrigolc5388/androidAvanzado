@@ -8,7 +8,7 @@ import com.rodrigolc.madridshops.domain.model.Shop
 import com.rodrigolc.madridshops.domain.model.Shops
 import com.rodrigolc.madridshops.repository.Repository
 import com.rodrigolc.madridshops.repository.RepositoryImpl
-import com.rodrigolc.madridshops.repository.model.ShopEntity
+import com.rodrigolc.madridshops.repository.model.ShoptivityEntity
 import java.lang.ref.WeakReference
 
 class GetAllShopsInteractorImplementation(context: Context): GetAllShopsInteractor {
@@ -26,7 +26,7 @@ class GetAllShopsInteractorImplementation(context: Context): GetAllShopsInteract
     }
 }
 
-private fun entityMapper(list: List<ShopEntity>): Shops {
+private fun entityMapper(list: List<ShoptivityEntity>): Shops {
     val tempList = ArrayList<Shop>()
 
     list.forEach {

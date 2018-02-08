@@ -4,6 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-internal class ShopsResponseEntity (
-        val result: List<ShopEntity>
+internal class ShoptivitiesResponseEntity(
+        val result: List<ShoptivityEntity>
 )

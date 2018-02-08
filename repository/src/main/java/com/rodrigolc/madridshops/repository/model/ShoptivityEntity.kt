@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class  ShoptivityEntity(
+data class ShoptivityEntity(
         val id: Long,
         val databaseId: Long,
         val name: String,
@@ -16,5 +16,6 @@ data class  ShoptivityEntity(
         @JsonProperty("opening_hours_en") val openingHoursEn: String,
         @JsonProperty("opening_hours_es") val openingHoursEs: String,
         @JsonProperty("gps_lat") val latitude: String,
-        @JsonProperty("gps_lon") val longitude: String
+        @JsonProperty("gps_lon") val longitude: String,
+        val type: String? = null
 )

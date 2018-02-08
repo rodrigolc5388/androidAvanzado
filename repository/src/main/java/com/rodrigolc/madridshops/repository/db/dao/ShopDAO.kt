@@ -5,22 +5,22 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.rodrigolc.madridshops.repository.db.DBConstants
 import com.rodrigolc.madridshops.repository.db.DBHelper
-import com.rodrigolc.madridshops.repository.model.ShopEntity
+import com.rodrigolc.madridshops.repository.model.ShoptivityEntity
 
-internal class ShopDAO(val dbHelper: DBHelper): DAOPersistable<ShopEntity>{
+internal class ShopDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityEntity>{
 
     private val dbReadOnlyConnection: SQLiteDatabase = dbHelper.readableDatabase
     private val dbReadWriteConnection: SQLiteDatabase = dbHelper.writableDatabase
 
-    override fun insert(element: ShopEntity): Long {
+    override fun insert(element: ShoptivityEntity): Long {
         var id: Long = 0
 
-        id = dbReadWriteConnection.insert(DBConstants.TABLE_SHOP, null, contentValues(element))
+        id = dbReadWriteConnection.insert(DBConstants.TABLE_SHOPTIVITIES, null, contentValues(element))
 
         return id
     }
 
-    override fun delete(element: ShopEntity): Long {
+    override fun delete(element: ShoptivityEntity): Long {
         if (element.databaseId < 1) {
             return 0
         }
@@ -30,21 +30,21 @@ internal class ShopDAO(val dbHelper: DBHelper): DAOPersistable<ShopEntity>{
 
     override fun delete(id: Long): Long {
         return dbReadWriteConnection.delete(
-                DBConstants.TABLE_SHOP,
-                DBConstants.KEY_SHOP_DATABASE_ID + " = ?",
+                DBConstants.TABLE_SHOPTIVITIES,
+                DBConstants.KEY_SHOPTIVITY_DATABASE_ID + " = ?",
                 arrayOf(id.toString())
                 ).toLong()
     }
 
     override fun deleteAll(): Boolean {
         return dbReadWriteConnection.delete(
-                DBConstants.TABLE_SHOP,
+                DBConstants.TABLE_SHOPTIVITIES,
                 null,
                 null
         ).toLong() >= 0
     }
 
-    override fun query(id: Long): ShopEntity {
+    override fun query(id: Long): ShoptivityEntity {
         val cursor = queryCursor(id)
 
         cursor.moveToFirst()
@@ -52,16 +52,16 @@ internal class ShopDAO(val dbHelper: DBHelper): DAOPersistable<ShopEntity>{
         return entityFromCursor(cursor)!!
     }
 
-    override fun query(): List<ShopEntity> {
-        val queryResult = ArrayList<ShopEntity>()
+    override fun query(): List<ShoptivityEntity> {
+        val queryResult = ArrayList<ShoptivityEntity>()
 
-        val cursor = dbReadOnlyConnection.query(DBConstants.TABLE_SHOP,
+        val cursor = dbReadOnlyConnection.query(DBConstants.TABLE_SHOPTIVITIES,
                 DBConstants.ALL_COLUMNS,
                 null,
                 null,
                 "",
                 "",
-                DBConstants.KEY_SHOP_DATABASE_ID)
+                DBConstants.KEY_SHOPTIVITY_DATABASE_ID)
 
         while (cursor.moveToNext()){
             val se = entityFromCursor(cursor)
@@ -72,59 +72,63 @@ internal class ShopDAO(val dbHelper: DBHelper): DAOPersistable<ShopEntity>{
     }
 
     override fun queryCursor(id: Long): Cursor {
-        val cursor = dbReadOnlyConnection.query(DBConstants.TABLE_SHOP,
+        val cursor = dbReadOnlyConnection.query(DBConstants.TABLE_SHOPTIVITIES,
                 DBConstants.ALL_COLUMNS,
-                DBConstants.KEY_SHOP_DATABASE_ID + " = ?",
+                DBConstants.KEY_SHOPTIVITY_DATABASE_ID + " = ?",
                 arrayOf(id.toString()),
                 "",
                 "",
-                DBConstants.KEY_SHOP_DATABASE_ID)
+                DBConstants.KEY_SHOPTIVITY_DATABASE_ID)
 
         return cursor
     }
 
-    override fun update(id: Long, element: ShopEntity): Long {
-        val numberOfRecordsUpdated = dbReadWriteConnection.update(DBConstants.TABLE_SHOP,
+    override fun update(id: Long, element: ShoptivityEntity): Long {
+        val numberOfRecordsUpdated = dbReadWriteConnection.update(DBConstants.TABLE_SHOPTIVITIES,
                 contentValues(element) ,
-                DBConstants.KEY_SHOP_DATABASE_ID + " = ?",
+                DBConstants.KEY_SHOPTIVITY_DATABASE_ID + " = ?",
                 arrayOf(id.toString())).toLong()
 
         return numberOfRecordsUpdated
     }
 
 
-    fun contentValues(shopEntity: ShopEntity): ContentValues {
+    fun contentValues(shoptivityEntity: ShoptivityEntity): ContentValues {
         val content = ContentValues()
 
-        content.put(DBConstants.KEY_SHOP_ID_JSON , shopEntity.id)
-        content.put(DBConstants.KEY_SHOP_NAME , shopEntity.name)
-        content.put(DBConstants.KEY_SHOP_DESCRIPTION , shopEntity.description)
-        content.put(DBConstants.KEY_SHOP_LATITUDE , shopEntity.latitude)
-        content.put(DBConstants.KEY_SHOP_LONGITUDE , shopEntity.longitude)
-        content.put(DBConstants.KEY_SHOP_IMAGE_URL , shopEntity.img)
-        content.put(DBConstants.KEY_SHOP_LOGO_IMAGE_URL , shopEntity.logo)
-        content.put(DBConstants.KEY_SHOP_ADDRESS , shopEntity.address)
-        content.put(DBConstants.KEY_SHOP_OPENING_HOURS , shopEntity.openingHours)
+        content.put(DBConstants.KEY_SHOPTIVITY_ID_JSON, shoptivityEntity.id)
+        content.put(DBConstants.KEY_SHOPTIVITY_NAME, shoptivityEntity.name)
+        content.put(DBConstants.KEY_SHOPTIVITY_DESCRIPTION_EN, shoptivityEntity.description_en)
+        content.put(DBConstants.KEY_SHOPTIVITY_DESCRIPTION_ES, shoptivityEntity.description_es)
+        content.put(DBConstants.KEY_SHOPTIVITY_LATITUDE, shoptivityEntity.latitude)
+        content.put(DBConstants.KEY_SHOPTIVITY_LONGITUDE, shoptivityEntity.longitude)
+        content.put(DBConstants.KEY_SHOPTIVITY_IMAGE_URL, shoptivityEntity.img)
+        content.put(DBConstants.KEY_SHOPTIVITY_LOGO_IMAGE_URL, shoptivityEntity.logo)
+        content.put(DBConstants.KEY_SHOPTIVITY_ADDRESS, shoptivityEntity.address)
+        content.put(DBConstants.KEY_SHOPTIVITY_OPENING_HOURS_EN, shoptivityEntity.openingHoursEn)
+        content.put(DBConstants.KEY_SHOPTIVITY_OPENING_HOURS_ES, shoptivityEntity.openingHoursEs)
 
         return content
     }
 
-    fun entityFromCursor(cursor: Cursor): ShopEntity? {
+    fun entityFromCursor(cursor: Cursor): ShoptivityEntity? {
         if(cursor.isAfterLast || cursor.isBeforeFirst){
             return null
         }
 
-        return ShopEntity(
-                cursor.getLong(cursor.getColumnIndex(DBConstants.KEY_SHOP_ID_JSON)),
-                cursor.getLong(cursor.getColumnIndex(DBConstants.KEY_SHOP_DATABASE_ID)),
-                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_NAME)),
-                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_DESCRIPTION)),
-                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_LATITUDE)),
-                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_LONGITUDE)),
-                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_IMAGE_URL)),
-                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_LOGO_IMAGE_URL)),
-                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_OPENING_HOURS)),
-                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_ADDRESS))
+        return ShoptivityEntity(
+                cursor.getLong(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_ID_JSON)),
+                cursor.getLong(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_DATABASE_ID)),
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_NAME)),
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_DESCRIPTION_EN)),
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_DESCRIPTION_ES)),
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_LATITUDE)),
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_LONGITUDE)),
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_IMAGE_URL)),
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_LOGO_IMAGE_URL)),
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_OPENING_HOURS_EN)),
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_OPENING_HOURS_ES)),
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_ADDRESS))
         )
     }
 

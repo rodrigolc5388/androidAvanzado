@@ -4,8 +4,8 @@ import android.content.Context
 import com.fasterxml.jackson.databind.exc.InvalidFormatException
 import com.rodrigolc.madridshops.repository.cache.Cache
 import com.rodrigolc.madridshops.repository.cache.CacheImpl
-import com.rodrigolc.madridshops.repository.model.ShopEntity
-import com.rodrigolc.madridshops.repository.model.ShopsResponseEntity
+import com.rodrigolc.madridshops.repository.model.ShoptivitiesResponseEntity
+import com.rodrigolc.madridshops.repository.model.ShoptivityEntity
 import com.rodrigolc.madridshops.repository.network.GetJsonManager
 import com.rodrigolc.madridshops.repository.network.GetJsonManagerVolleyImpl
 import com.rodrigolc.madridshops.repository.network.json.JsonEntitiesParser
@@ -18,7 +18,7 @@ class RepositoryImpl(context: Context): Repository {
     private val weakContext = WeakReference<Context>(context)
     private val cache: Cache = CacheImpl(weakContext.get()!!)
 
-    override fun getAllShops(success: (shops: List<ShopEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
+    override fun getAllShops(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
         // Read all Shops from cache
         cache.getAllShops(success = {
             // if there's Shops in cache --> return Shops
@@ -32,16 +32,16 @@ class RepositoryImpl(context: Context): Repository {
 
     }
 
-    private fun populateCache(success: (shops: List<ShopEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
+    private fun populateCache(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
         // perform network request
 
         val jsonManager: GetJsonManager = GetJsonManagerVolleyImpl(weakContext.get() !!)
         jsonManager.execute(BuildConfig.MADRID_SHOPS_SERVER_URL, success =  object: SuccessCompletion<String> {
             override fun successCompletion(e: String) {
                 val parser = JsonEntitiesParser()
-                var responseEntity: ShopsResponseEntity
+                var responseEntity: ShoptivitiesResponseEntity
                 try {
-                    responseEntity = parser.parse<ShopsResponseEntity>(e)
+                    responseEntity = parser.parse<ShoptivitiesResponseEntity>(e)
                 } catch (e: InvalidFormatException) {
                     error("ERROR PARSING")
                     return
