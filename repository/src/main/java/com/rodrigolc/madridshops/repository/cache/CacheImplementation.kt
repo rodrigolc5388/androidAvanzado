@@ -13,20 +13,20 @@ internal class CacheImpl(context: Context): Cache {
 
     val context = WeakReference<Context>(context)
 
-    override fun getAllShops(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
+    override fun getAllShoptivities(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
         Thread(Runnable {
-            var shops = ShoptivityDAO(cacheDBHelper()).query()
+            var shoptivities = ShoptivityDAO(cacheDBHelper()).query()
             DispatchOnMainThreadRun(Runnable {
-                if (shops.count() > 0) {
-                    success(shops)
+                if (shoptivities.count() > 0) {
+                    success(shoptivities)
                 } else {
-                    error("No shops")
+                    error("No shoptivities")
                 }
             })
         }).run()
     }
 
-    override fun saveAllShops(shoptivities: List<ShoptivityEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit) {
+    override fun saveAllShoptivities(shoptivities: List<ShoptivityEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit) {
         Thread(Runnable {
             try {
                 shoptivities.forEach { ShoptivityDAO(cacheDBHelper()).insert(it) }
@@ -36,7 +36,7 @@ internal class CacheImpl(context: Context): Cache {
                 })
             } catch(e: Exception) {
                 DispatchOnMainThreadRun(Runnable {
-                        error("Error inserting shoptivities")
+                        error("Error saving/inserting shoptivities")
                 })
             }
 
@@ -45,7 +45,7 @@ internal class CacheImpl(context: Context): Cache {
 
 
 
-    override fun deleteAllShops(success: () -> Unit, error: (errorMessage: String) -> Unit) {
+    override fun deleteAllShoptivities(success: () -> Unit, error: (errorMessage: String) -> Unit) {
         Thread(Runnable {
             var successDeleting = ShoptivityDAO(cacheDBHelper()).deleteAll()
             DispatchOnMainThreadRun(Runnable {
@@ -59,6 +59,6 @@ internal class CacheImpl(context: Context): Cache {
     }
 
     private fun cacheDBHelper(): DBHelper {
-        return buildDBHelper(context.get()!!, "MadridShops.sqlite", 1)
+        return buildDBHelper(context.get()!!, "MadridLife.sqlite", 1)
     }
 }

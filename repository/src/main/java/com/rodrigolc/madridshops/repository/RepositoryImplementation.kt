@@ -20,7 +20,7 @@ class RepositoryImpl(context: Context): Repository {
 
     override fun getAllShops(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
         // Read all Shops from cache
-        cache.getAllShops(success = {
+        cache.getAllShoptivities(success = {
             // if there's Shops in cache --> return Shops
             success(it)
 
@@ -47,7 +47,7 @@ class RepositoryImpl(context: Context): Repository {
                     return
                 }
                 // store result in cache
-                cache.saveAllShops(responseEntity.result, success = {
+                cache.saveAllShoptivities(responseEntity.result, success = {
                     success(responseEntity.result)
                 }, error = {
                     error("Something happened on the way to heaven!")
@@ -63,6 +63,6 @@ class RepositoryImpl(context: Context): Repository {
 
     override fun deleteAllShops(success: () -> Unit, error: (errorMessage: String) -> Unit) {
 
-        cache.deleteAllShops(success, error)
+        cache.deleteAllShoptivities(success, error)
     }
 }

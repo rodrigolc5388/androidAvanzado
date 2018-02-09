@@ -4,7 +4,7 @@ import com.rodrigolc.madridshops.repository.model.ShoptivityEntity
 
 
 internal interface Cache {
-    fun getAllShops(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit)
-    fun saveAllShops(shoptivities: List<ShoptivityEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit)
-    fun deleteAllShops(success: () -> Unit, error: (errorMessage: String) -> Unit)
+    fun getAllShoptivities(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit)
+    fun saveAllShoptivities(shoptivities: List<ShoptivityEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit)
+    fun deleteAllShoptivities(success: () -> Unit, error: (errorMessage: String) -> Unit)
 }
