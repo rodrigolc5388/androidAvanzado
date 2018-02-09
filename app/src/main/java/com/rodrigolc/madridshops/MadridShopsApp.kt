@@ -21,10 +21,9 @@ class MadridShopsApp: MultiDexApplication() {
         Log.d("App", "onCreate")
 
 
-        //val allShopsInteractor = GetAllShoptivitiesInteractorImplementation(this)
-        val allShopsInteractor2: GetAllShoptivitiesInteractor = GetAllShoptivitiesInteractorImplementation(this)
+        val allShopsInteractor: GetAllShoptivitiesInteractor = GetAllShoptivitiesInteractorImplementation(this)
 
-        allShopsInteractor2.execute(object: SuccessCompletion<Shoptivities> {
+        allShopsInteractor.execute(object: SuccessCompletion<Shoptivities> {
             override fun successCompletion(shoptivities: Shoptivities) {
                 Log.d("Shoptivities", "Count: " + shoptivities.count())
 

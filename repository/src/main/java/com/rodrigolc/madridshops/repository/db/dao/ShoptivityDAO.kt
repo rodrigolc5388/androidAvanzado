@@ -62,7 +62,6 @@ internal class ShoptivityDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityE
                 "",
                 "",
                 DBConstants.KEY_SHOPTIVITY_NAME)
-        //DBConstants.KEY_SHOPTIVITY_DATABASE_ID
 
         while (cursor.moveToNext()){
             val se = entityFromCursor(cursor)

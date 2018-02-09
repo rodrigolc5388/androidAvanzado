@@ -1,17 +1,9 @@
 package com.rodrigolc.madridshops.domain.interactor.getAllShops
 
-import com.rodrigolc.madridshops.domain.interactor.ErrorClosure
-import com.rodrigolc.madridshops.domain.interactor.ErrorCompletion
-import com.rodrigolc.madridshops.domain.interactor.SuccessClosure
-import com.rodrigolc.madridshops.domain.interactor.SuccessCompletion
-import com.rodrigolc.madridshops.domain.model.Shoptivity
-import com.rodrigolc.madridshops.domain.model.Shoptivities
-import java.util.*
 
 
 
-
-class GetAllShoptivitiesInteractorFakeImpl : GetAllShoptivitiesInteractor {
+/*class GetAllShoptivitiesInteractorFakeImpl : GetAllShoptivitiesInteractor {
 
     override fun execute(success: SuccessCompletion<Shoptivities>, error: ErrorCompletion) {
         var allOk = true
@@ -54,4 +46,4 @@ class GetAllShoptivitiesInteractorFakeImpl : GetAllShoptivitiesInteractor {
         val shops = Shoptivities(list)
         return shops
     }
-}
+}*/

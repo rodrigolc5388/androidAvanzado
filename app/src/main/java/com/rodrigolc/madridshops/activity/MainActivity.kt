@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         getAllShopsInteractor.execute(object: SuccessCompletion<Shoptivities>{
             override fun successCompletion(shoptivities: Shoptivities) {
                 initializeMap(shoptivities)
+                Log.d("Shoptivities", "Count: " + shoptivities.count())
 
             }
 

@@ -49,8 +49,8 @@ internal object DBConstants {
                     + KEY_SHOPTIVITY_LONGITUDE + " real, "
                     + KEY_SHOPTIVITY_DESCRIPTION_EN + " text, "
                     + KEY_SHOPTIVITY_DESCRIPTION_ES + " text, "
-                    + KEY_SHOPTIVITY_OPENING_HOURS_EN + " text "
-                    + KEY_SHOPTIVITY_OPENING_HOURS_ES + " text "
+                    + KEY_SHOPTIVITY_OPENING_HOURS_EN + " text, "
+                    + KEY_SHOPTIVITY_OPENING_HOURS_ES + " text, "
                     + KEY_SHOPTIVITY_TYPE + " text "
                     + ");")
 
