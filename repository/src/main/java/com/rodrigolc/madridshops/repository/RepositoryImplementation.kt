@@ -18,14 +18,14 @@ class RepositoryImpl(context: Context): Repository {
     private val weakContext = WeakReference<Context>(context)
     private val cache: Cache = CacheImpl(weakContext.get()!!)
 
-    override fun getAllShops(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
-        // Read all Shops from cache
+    override fun getAllShoptivities(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
+        // Read all Shoptivities from cache
         cache.getAllShoptivities(success = {
-            // if there's Shops in cache --> return Shops
+            // if there's Shoptivities in cache --> return Shoptivities
             success(it)
 
         }, error = {
-            // if no Shops in cache --> network
+            // if no Shoptivities in cache --> network
 
             populateCache(success, error)
         })
@@ -39,18 +39,40 @@ class RepositoryImpl(context: Context): Repository {
         jsonManager.execute(BuildConfig.MADRID_SHOPS_SERVER_URL, success =  object: SuccessCompletion<String> {
             override fun successCompletion(e: String) {
                 val parser = JsonEntitiesParser()
-                var responseEntity: ShoptivitiesResponseEntity
+                var shopsResponseEntity: ShoptivitiesResponseEntity
                 try {
-                    responseEntity = parser.parse<ShoptivitiesResponseEntity>(e)
+                    shopsResponseEntity = parser.parse<ShoptivitiesResponseEntity>(e)
                 } catch (e: InvalidFormatException) {
-                    error("ERROR PARSING")
+                    error("ERROR PARSING SHOPS")
                     return
                 }
                 // store result in cache
-                cache.saveAllShoptivities(responseEntity.result, success = {
-                    success(responseEntity.result)
+                cache.saveAllShoptivities(shopsResponseEntity.result, success = {
+                    success(shopsResponseEntity.result)
                 }, error = {
-                    error("Something happened on the way to heaven!")
+                    error("Something happened on the way to Shops heaven!")
+                })
+            }
+        }, error = object: ErrorCompletion {
+            override fun errorCompletion(errorMessage: String) {
+            }
+        })
+
+        jsonManager.execute(BuildConfig.MADRID_ACTIVITIES_SERVER_URL, success =  object: SuccessCompletion<String> {
+            override fun successCompletion(e: String) {
+                val parser = JsonEntitiesParser()
+                var activitiesResponseEntity: ShoptivitiesResponseEntity
+                try {
+                    activitiesResponseEntity = parser.parse<ShoptivitiesResponseEntity>(e)
+                } catch (e: InvalidFormatException) {
+                    error("ERROR PARSING ACTIVITIES")
+                    return
+                }
+                // store result in cache
+                cache.saveAllShoptivities(activitiesResponseEntity.result, success = {
+                    success(activitiesResponseEntity.result)
+                }, error = {
+                    error("Something happened on the way to Activities heaven!")
                 })
             }
         }, error = object: ErrorCompletion {
@@ -60,8 +82,7 @@ class RepositoryImpl(context: Context): Repository {
     }
 
 
-
-    override fun deleteAllShops(success: () -> Unit, error: (errorMessage: String) -> Unit) {
+    override fun deleteAllShoptivities(success: () -> Unit, error: (errorMessage: String) -> Unit) {
 
         cache.deleteAllShoptivities(success, error)
     }

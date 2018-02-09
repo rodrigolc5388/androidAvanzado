@@ -21,8 +21,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.rodrigolc.madridshops.R
 import com.rodrigolc.madridshops.domain.interactor.ErrorCompletion
 import com.rodrigolc.madridshops.domain.interactor.SuccessCompletion
-import com.rodrigolc.madridshops.domain.interactor.getAllShops.GetAllShopsInteractor
-import com.rodrigolc.madridshops.domain.interactor.getAllShopshops.GetAllShopsInteractorImplementation
+import com.rodrigolc.madridshops.domain.interactor.getAllShops.GetAllShoptivitiesInteractor
+import com.rodrigolc.madridshops.domain.interactor.getAllShopshops.GetAllShoptivitiesInteractorImplementation
 import com.rodrigolc.madridshops.domain.model.Shops
 import com.rodrigolc.madridshops.fragment.ListFragment
 import com.rodrigolc.madridshops.router.Router
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupMap() {
-        val getAllShopsInteractor: GetAllShopsInteractor = GetAllShopsInteractorImplementation(this)
+        val getAllShopsInteractor: GetAllShoptivitiesInteractor = GetAllShoptivitiesInteractorImplementation(this)
         getAllShopsInteractor.execute(object: SuccessCompletion<Shops>{
             override fun successCompletion(shops: Shops) {
                 initializeMap(shops)

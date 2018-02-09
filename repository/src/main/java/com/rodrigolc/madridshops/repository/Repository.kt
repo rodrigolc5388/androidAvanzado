@@ -4,7 +4,7 @@ import com.rodrigolc.madridshops.repository.model.ShoptivityEntity
 
 
 interface Repository {
-    fun getAllShops(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit)
-    fun deleteAllShops(success: () -> Unit, error: (errorMessage: String) -> Unit)
+    fun getAllShoptivities(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit)
+    fun deleteAllShoptivities(success: () -> Unit, error: (errorMessage: String) -> Unit)
 
 }

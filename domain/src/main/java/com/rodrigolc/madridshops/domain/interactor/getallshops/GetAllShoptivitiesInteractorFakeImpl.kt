@@ -11,7 +11,7 @@ import java.util.*
 
 
 
-class GetAllShopsInteractorFakeImpl: GetAllShopsInteractor {
+class GetAllShoptivitiesInteractorFakeImpl : GetAllShoptivitiesInteractor {
 
     override fun execute(success: SuccessCompletion<Shops>, error: ErrorCompletion) {
         var allOk = true
