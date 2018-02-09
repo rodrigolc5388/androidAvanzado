@@ -8,7 +8,7 @@ import com.rodrigolc.madridshops.domain.interactor.getAllShops.GetAllShoptivitie
 import com.rodrigolc.madridshops.domain.interactor.getAllShopshops.GetAllShoptivitiesInteractorImplementation
 
 
-import com.rodrigolc.madridshops.domain.model.Shops
+import com.rodrigolc.madridshops.domain.model.Shoptivities
 
 
 class MadridShopsApp: MultiDexApplication() {
@@ -24,11 +24,11 @@ class MadridShopsApp: MultiDexApplication() {
         //val allShopsInteractor = GetAllShoptivitiesInteractorImplementation(this)
         val allShopsInteractor2: GetAllShoptivitiesInteractor = GetAllShoptivitiesInteractorImplementation(this)
 
-        allShopsInteractor2.execute(object: SuccessCompletion<Shops> {
-            override fun successCompletion(shops: Shops) {
-                Log.d("Shops", "Count: " + shops.count())
+        allShopsInteractor2.execute(object: SuccessCompletion<Shoptivities> {
+            override fun successCompletion(shoptivities: Shoptivities) {
+                Log.d("Shoptivities", "Count: " + shoptivities.count())
 
-                shops.shops.forEach { Log.d("Shop", it.name) }
+                shoptivities.shoptivities.forEach { Log.d("Shoptivity", it.name) }
             }
         }, object: ErrorCompletion {
             override fun errorCompletion(errorMessage: String) {

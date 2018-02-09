@@ -4,8 +4,8 @@ import com.rodrigolc.madridshops.domain.interactor.ErrorClosure
 import com.rodrigolc.madridshops.domain.interactor.ErrorCompletion
 import com.rodrigolc.madridshops.domain.interactor.SuccessClosure
 import com.rodrigolc.madridshops.domain.interactor.SuccessCompletion
-import com.rodrigolc.madridshops.domain.model.Shop
-import com.rodrigolc.madridshops.domain.model.Shops
+import com.rodrigolc.madridshops.domain.model.Shoptivity
+import com.rodrigolc.madridshops.domain.model.Shoptivities
 import java.util.*
 
 
@@ -13,7 +13,7 @@ import java.util.*
 
 class GetAllShoptivitiesInteractorFakeImpl : GetAllShoptivitiesInteractor {
 
-    override fun execute(success: SuccessCompletion<Shops>, error: ErrorCompletion) {
+    override fun execute(success: SuccessCompletion<Shoptivities>, error: ErrorCompletion) {
         var allOk = true
 
         // connect to the repository
@@ -43,15 +43,15 @@ class GetAllShoptivitiesInteractorFakeImpl : GetAllShoptivitiesInteractor {
     }
 
 
-    fun createFakeListOfShops(): Shops {
-        val list = ArrayList<Shop>()
+    fun createFakeListOfShops(): Shoptivities {
+        val list = ArrayList<Shoptivity>()
 
         for(i in 0..100){
-            val shop = Shop(i, "Shop " + i, address = "Address " + i)
+            val shop = Shoptivity(i, "Shoptivity " + i, address = "Address " + i)
             list.add(shop)
         }
 
-        val shops = Shops(list)
+        val shops = Shoptivities(list)
         return shops
     }
 }

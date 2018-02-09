@@ -23,7 +23,7 @@ import com.rodrigolc.madridshops.domain.interactor.ErrorCompletion
 import com.rodrigolc.madridshops.domain.interactor.SuccessCompletion
 import com.rodrigolc.madridshops.domain.interactor.getAllShops.GetAllShoptivitiesInteractor
 import com.rodrigolc.madridshops.domain.interactor.getAllShopshops.GetAllShoptivitiesInteractorImplementation
-import com.rodrigolc.madridshops.domain.model.Shops
+import com.rodrigolc.madridshops.domain.model.Shoptivities
 import com.rodrigolc.madridshops.fragment.ListFragment
 import com.rodrigolc.madridshops.router.Router
 import kotlinx.android.synthetic.main.activity_main.*
@@ -45,9 +45,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupMap() {
         val getAllShopsInteractor: GetAllShoptivitiesInteractor = GetAllShoptivitiesInteractorImplementation(this)
-        getAllShopsInteractor.execute(object: SuccessCompletion<Shops>{
-            override fun successCompletion(shops: Shops) {
-                initializeMap(shops)
+        getAllShopsInteractor.execute(object: SuccessCompletion<Shoptivities>{
+            override fun successCompletion(shoptivities: Shoptivities) {
+                initializeMap(shoptivities)
 
             }
 
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun initializeMap(shops: Shops) {
+    private fun initializeMap(shoptivities: Shoptivities) {
         val mapFragment = supportFragmentManager.findFragmentById(R.id.activity_main_map_fragment) as SupportMapFragment
         mapFragment.getMapAsync({
             Log.d("SUCCESS", "HABEMUS MAPA")
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
             it.uiSettings.isZoomControlsEnabled = true
             showUserPosition(baseContext, it)
             map = it
-            addAllPins(shops)
+            addAllPins(shoptivities)
         })
     }
 
@@ -110,9 +110,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun addAllPins(shops: Shops){
-        for (i in 0 until shops.count()){
-            val shop = shops.get(i)
+    fun addAllPins(shoptivities: Shoptivities){
+        for (i in 0 until shoptivities.count()){
+            val shop = shoptivities.get(i)
             addPin(map!!, 40.416775, -3.703790, shop.name )
 
         }
