@@ -3,7 +3,7 @@ package com.rodrigolc.repository
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import com.rodrigolc.madridshops.repository.db.buildDBHelper
-import com.rodrigolc.madridshops.repository.db.dao.ShopDAO
+import com.rodrigolc.madridshops.repository.db.dao.ShoptivityDAO
 import com.rodrigolc.madridshops.repository.model.ShoptivityEntity
 import junit.framework.Assert.assertTrue
 import org.junit.Test
@@ -36,7 +36,7 @@ class ShopDAOTests {
                 ""
         )
 
-        val shopEntityDao = ShopDAO(dbHelper)
+        val shopEntityDao = ShoptivityDAO(dbHelper)
 
         val id = shopEntityDao.insert(shop)
 

@@ -7,7 +7,7 @@ import com.rodrigolc.madridshops.repository.db.DBConstants
 import com.rodrigolc.madridshops.repository.db.DBHelper
 import com.rodrigolc.madridshops.repository.model.ShoptivityEntity
 
-internal class ShopDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityEntity>{
+internal class ShoptivityDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityEntity>{
 
     private val dbReadOnlyConnection: SQLiteDatabase = dbHelper.readableDatabase
     private val dbReadWriteConnection: SQLiteDatabase = dbHelper.writableDatabase
@@ -61,7 +61,8 @@ internal class ShopDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityEntity>
                 null,
                 "",
                 "",
-                DBConstants.KEY_SHOPTIVITY_DATABASE_ID)
+                DBConstants.KEY_SHOPTIVITY_NAME)
+        //DBConstants.KEY_SHOPTIVITY_DATABASE_ID
 
         while (cursor.moveToNext()){
             val se = entityFromCursor(cursor)
@@ -83,11 +84,13 @@ internal class ShopDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityEntity>
         return cursor
     }
 
+    // Usar element.databaseId o el parámetro id??
     override fun update(id: Long, element: ShoptivityEntity): Long {
         val numberOfRecordsUpdated = dbReadWriteConnection.update(DBConstants.TABLE_SHOPTIVITIES,
-                contentValues(element) ,
+                contentValues(element),
                 DBConstants.KEY_SHOPTIVITY_DATABASE_ID + " = ?",
-                arrayOf(id.toString())).toLong()
+                arrayOf(element.databaseId.toString())).toLong()
+        //(id.toString())
 
         return numberOfRecordsUpdated
     }
@@ -107,6 +110,7 @@ internal class ShopDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityEntity>
         content.put(DBConstants.KEY_SHOPTIVITY_ADDRESS, shoptivityEntity.address)
         content.put(DBConstants.KEY_SHOPTIVITY_OPENING_HOURS_EN, shoptivityEntity.openingHoursEn)
         content.put(DBConstants.KEY_SHOPTIVITY_OPENING_HOURS_ES, shoptivityEntity.openingHoursEs)
+        content.put(DBConstants.KEY_SHOPTIVITY_TYPE, shoptivityEntity.type)
 
         return content
     }
@@ -128,7 +132,8 @@ internal class ShopDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityEntity>
                 cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_LOGO_IMAGE_URL)),
                 cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_OPENING_HOURS_EN)),
                 cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_OPENING_HOURS_ES)),
-                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_ADDRESS))
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_ADDRESS)),
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_TYPE))
         )
     }
 
