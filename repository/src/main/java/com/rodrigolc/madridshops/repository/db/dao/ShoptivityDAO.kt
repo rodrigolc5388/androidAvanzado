@@ -98,15 +98,17 @@ internal class ShoptivityDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityE
     fun contentValues(shoptivityEntity: ShoptivityEntity): ContentValues {
         val content = ContentValues()
 
+        content.put(DBConstants.KEY_SHOPTIVITY_DATABASE_ID, shoptivityEntity.databaseId)
         content.put(DBConstants.KEY_SHOPTIVITY_ID_JSON, shoptivityEntity.id)
         content.put(DBConstants.KEY_SHOPTIVITY_NAME, shoptivityEntity.name)
+        content.put(DBConstants.KEY_SHOPTIVITY_IMAGE_URL, shoptivityEntity.img)
+        content.put(DBConstants.KEY_SHOPTIVITY_LOGO_IMAGE_URL, shoptivityEntity.logo)
+        content.put(DBConstants.KEY_SHOPTIVITY_ADDRESS, shoptivityEntity.address)
+        content.put(DBConstants.KEY_SHOPTIVITY_URL, shoptivityEntity.url)
         content.put(DBConstants.KEY_SHOPTIVITY_DESCRIPTION_EN, shoptivityEntity.description_en)
         content.put(DBConstants.KEY_SHOPTIVITY_DESCRIPTION_ES, shoptivityEntity.description_es)
         content.put(DBConstants.KEY_SHOPTIVITY_LATITUDE, shoptivityEntity.latitude)
         content.put(DBConstants.KEY_SHOPTIVITY_LONGITUDE, shoptivityEntity.longitude)
-        content.put(DBConstants.KEY_SHOPTIVITY_IMAGE_URL, shoptivityEntity.img)
-        content.put(DBConstants.KEY_SHOPTIVITY_LOGO_IMAGE_URL, shoptivityEntity.logo)
-        content.put(DBConstants.KEY_SHOPTIVITY_ADDRESS, shoptivityEntity.address)
         content.put(DBConstants.KEY_SHOPTIVITY_OPENING_HOURS_EN, shoptivityEntity.openingHoursEn)
         content.put(DBConstants.KEY_SHOPTIVITY_OPENING_HOURS_ES, shoptivityEntity.openingHoursEs)
         content.put(DBConstants.KEY_SHOPTIVITY_TYPE, shoptivityEntity.type)
@@ -120,18 +122,19 @@ internal class ShoptivityDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityE
         }
 
         return ShoptivityEntity(
-                cursor.getLong(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_ID_JSON)),
                 cursor.getLong(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_DATABASE_ID)),
+                cursor.getLong(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_ID_JSON)),
                 cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_NAME)),
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_IMAGE_URL)),
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_LOGO_IMAGE_URL)),
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_ADDRESS)),
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_URL)),
                 cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_DESCRIPTION_EN)),
                 cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_DESCRIPTION_ES)),
                 cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_LATITUDE)),
                 cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_LONGITUDE)),
-                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_IMAGE_URL)),
-                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_LOGO_IMAGE_URL)),
                 cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_OPENING_HOURS_EN)),
                 cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_OPENING_HOURS_ES)),
-                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_ADDRESS)),
                 cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOPTIVITY_TYPE))
         )
     }
