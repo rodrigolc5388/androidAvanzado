@@ -63,11 +63,11 @@ class RepositoryImpl(context: Context): Repository {
                 success =  object: SuccessCompletion<String> {
                     override fun successCompletion(e: String) {
                         val parser = JsonEntitiesParser()
-                        //Log.d("CORIO12345", "" + parser.hashCode())
+                        Log.d("CORIO12345", "" + parser.hashCode())
                         var activitiesResponseEntity: ShoptivitiesResponseEntity
                         try {
                             activitiesResponseEntity = parser.parse<ShoptivitiesResponseEntity>(e)
-                            //Log.d("CORIO", "" + activitiesResponseEntity.result)
+                            Log.d("CORIO PARSE RESULT", "" + activitiesResponseEntity.result)
                         } catch (e: InvalidFormatException) {
                             error("ERROR PARSING ACTIVITIES")
                             return
