@@ -19,7 +19,6 @@ class GetAllShoptivitiesInteractorImplementation(context: Context): GetAllShopti
     override fun execute(success: SuccessCompletion<Shoptivities>, error: ErrorCompletion) {
         repository.getAllShoptivities(success = {
             val shoptivitiesList: Shoptivities = entityMapper(it)
-            //Log.d("🤮","" + it[13].longitude )
             success.successCompletion(shoptivitiesList)
         }, error = {
             error(it)
@@ -42,7 +41,6 @@ private fun entityMapper(list: List<ShoptivityEntity>): Shoptivities {
                 parseStringToFloat(it.latitude)!!,
                 //it.type!!)
                 "activity")
-        Log.d("🤮", "" + it.longitude)
         tempList.add(shoptivity)
     }
 

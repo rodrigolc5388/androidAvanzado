@@ -35,7 +35,7 @@ class RepositoryImpl(context: Context): Repository {
         // perform network request
 
         val jsonManager: GetJsonManager = GetJsonManagerVolleyImpl(weakContext.get() !!)
-        jsonManager.execute(BuildConfig.MADRID_SHOPS_SERVER_URL, success =  object: SuccessCompletion<String> {
+        /*jsonManager.execute(BuildConfig.MADRID_SHOPS_SERVER_URL, success =  object: SuccessCompletion<String> {
             override fun successCompletion(e: String) {
                 val parser = JsonEntitiesParser()
                 var shopsResponseEntity: ShoptivitiesResponseEntity
@@ -55,7 +55,7 @@ class RepositoryImpl(context: Context): Repository {
         }, error = object: ErrorCompletion {
             override fun errorCompletion(errorMessage: String) {
             }
-        })
+        })*/
 
         jsonManager.execute(BuildConfig.MADRID_ACTIVITIES_SERVER_URL,
                 success =  object: SuccessCompletion<String> {

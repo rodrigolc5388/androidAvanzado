@@ -43,7 +43,6 @@ internal class CacheImpl(context: Context): Cache {
             }
 
         }).run()
-        Log.d("CORIO", "CACHE SAVEALL")
     }
 
 
