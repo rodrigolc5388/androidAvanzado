@@ -1,6 +1,7 @@
 package com.rodrigolc.madridshops.repository.cache
 
 import android.content.Context
+import android.util.Log
 import com.rodrigolc.madridshops.repository.db.DBHelper
 import com.rodrigolc.madridshops.repository.db.buildDBHelper
 import com.rodrigolc.madridshops.repository.db.dao.ShoptivityDAO
@@ -24,6 +25,7 @@ internal class CacheImpl(context: Context): Cache {
                 }
             })
         }).run()
+        Log.d("CORIO", "CACHE GETALL")
     }
 
     override fun saveAllShoptivities(shoptivities: List<ShoptivityEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit) {
@@ -41,6 +43,7 @@ internal class CacheImpl(context: Context): Cache {
             }
 
         }).run()
+        Log.d("CORIO", "CACHE SAVEALL")
     }
 
 

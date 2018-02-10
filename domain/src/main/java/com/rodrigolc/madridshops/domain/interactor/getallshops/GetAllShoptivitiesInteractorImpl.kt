@@ -20,10 +20,12 @@ class GetAllShoptivitiesInteractorImplementation(context: Context): GetAllShopti
         repository.getAllShoptivities(success = {
             val shoptivitiesList: Shoptivities = entityMapper(it)
             success.successCompletion(shoptivitiesList)
+            Log.d("CORIO", "GET ALL SHOPSINTERACTOR EXECUTE SUCCESS")
         }, error = {
+            Log.d("CORIO", "GETALL SHOPS INTERACTOR EXECUTE ERROR")
             error(it)
         })
-
+        Log.d("CORIO", "GET ALL SHOPS INTERACTOR EXECUTE")
     }
 }
 
