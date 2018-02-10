@@ -63,7 +63,6 @@ class RepositoryImpl(context: Context): Repository {
                 success =  object: SuccessCompletion<String> {
                     override fun successCompletion(e: String) {
                         val parser = JsonEntitiesParser()
-                        Log.d("CORIO12345", "" + parser.hashCode())
                         var activitiesResponseEntity: ShoptivitiesResponseEntity
                         try {
                             activitiesResponseEntity = parser.parse<ShoptivitiesResponseEntity>(e)
@@ -75,6 +74,7 @@ class RepositoryImpl(context: Context): Repository {
                         // store result in cache
                         cache.saveAllShoptivities(activitiesResponseEntity.result, success = {
                             success(activitiesResponseEntity.result)
+                            Log.d("CORIO", "REPOIMPL EXECUTE CACHESAVEALL")
                         }, error = {
                             error("Something happened on the way to Activities heaven!")
                         })

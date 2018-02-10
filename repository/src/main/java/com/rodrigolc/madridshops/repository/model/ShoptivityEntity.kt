@@ -11,7 +11,7 @@ data class ShoptivityEntity(
         val img: String,
         @JsonProperty("logo_img") val logo: String,
         val address: String,
-        val url: String,
+        val url: String?,
         val description_en: String,
         val description_es: String,
         @JsonProperty("gps_lat") val latitude: String,

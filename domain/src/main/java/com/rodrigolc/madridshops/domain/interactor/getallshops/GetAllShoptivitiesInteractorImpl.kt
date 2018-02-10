@@ -41,7 +41,8 @@ private fun entityMapper(list: List<ShoptivityEntity>): Shoptivities {
                 it.openingHoursEn,
                 parseStringToFloat(it.longitude)!!,
                 parseStringToFloat(it.latitude)!!,
-                it.type!!)
+                //it.type!!)
+                "activity")
         tempList.add(shoptivity)
     }
 
