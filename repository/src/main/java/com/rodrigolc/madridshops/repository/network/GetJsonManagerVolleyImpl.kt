@@ -31,7 +31,6 @@ internal class GetJsonManagerVolleyImpl(context: Context): GetJsonManager {
 
         // add request to queue
         requestQueue().add(request)
-        Log.d("CORIO", "GET SON MANAGER VOLLEY DOWNLOAD REQUEST")
     }
 
     // get request queue

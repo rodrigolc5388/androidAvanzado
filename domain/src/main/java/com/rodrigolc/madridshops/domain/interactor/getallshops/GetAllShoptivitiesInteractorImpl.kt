@@ -19,13 +19,11 @@ class GetAllShoptivitiesInteractorImplementation(context: Context): GetAllShopti
     override fun execute(success: SuccessCompletion<Shoptivities>, error: ErrorCompletion) {
         repository.getAllShoptivities(success = {
             val shoptivitiesList: Shoptivities = entityMapper(it)
+            //Log.d("🤮","" + it[13].longitude )
             success.successCompletion(shoptivitiesList)
-            Log.d("CORIO", "GET ALL SHOPSINTERACTOR EXECUTE SUCCESS")
         }, error = {
-            Log.d("CORIO", "GETALL SHOPS INTERACTOR EXECUTE ERROR")
             error(it)
         })
-        Log.d("CORIO", "GET ALL SHOPS INTERACTOR EXECUTE")
     }
 }
 
@@ -33,7 +31,8 @@ private fun entityMapper(list: List<ShoptivityEntity>): Shoptivities {
     val tempList = ArrayList<Shoptivity>()
 
     list.forEach {
-        val shoptivity = Shoptivity(it.id.toInt(),
+        val shoptivity = Shoptivity(
+                it.id.toInt(),
                 it.name,
                 it.address,
                 it.description_en,
@@ -43,6 +42,7 @@ private fun entityMapper(list: List<ShoptivityEntity>): Shoptivities {
                 parseStringToFloat(it.latitude)!!,
                 //it.type!!)
                 "activity")
+        Log.d("🤮", "" + it.longitude)
         tempList.add(shoptivity)
     }
 

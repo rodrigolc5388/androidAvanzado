@@ -49,16 +49,13 @@ class MainActivity : AppCompatActivity() {
             override fun successCompletion(shoptivities: Shoptivities) {
                 initializeMap(shoptivities)
                 Log.d("Shoptivities", "Count: " + shoptivities.count())
-                Log.d("CORIO", "SUCCESS SETUPMAP")
             }
 
         }, object: ErrorCompletion{
             override fun errorCompletion(errorMessage: String) {
                 Toast.makeText(baseContext, "Error loading", Toast.LENGTH_LONG).show()
-                Log.d("CORIO", "ERROR SETUPMAP")
             }
         })
-        Log.d("CORIO", "PASO X SETUPMAP")
     }
 
     private fun initializeMap(shoptivities: Shoptivities) {

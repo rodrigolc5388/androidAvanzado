@@ -1,7 +1,6 @@
 package com.rodrigolc.madridshops.repository
 
 import android.content.Context
-import android.util.Log
 import com.fasterxml.jackson.databind.exc.InvalidFormatException
 import com.rodrigolc.madridshops.repository.cache.Cache
 import com.rodrigolc.madridshops.repository.cache.CacheImpl
@@ -30,14 +29,13 @@ class RepositoryImpl(context: Context): Repository {
 
             populateCache(success, error)
         })
-        Log.d("CORIO", "REPOSITORY GETALL")
     }
 
     private fun populateCache(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
         // perform network request
 
         val jsonManager: GetJsonManager = GetJsonManagerVolleyImpl(weakContext.get() !!)
-        /*jsonManager.execute(BuildConfig.MADRID_SHOPS_SERVER_URL, success =  object: SuccessCompletion<String> {
+        jsonManager.execute(BuildConfig.MADRID_SHOPS_SERVER_URL, success =  object: SuccessCompletion<String> {
             override fun successCompletion(e: String) {
                 val parser = JsonEntitiesParser()
                 var shopsResponseEntity: ShoptivitiesResponseEntity
@@ -57,7 +55,7 @@ class RepositoryImpl(context: Context): Repository {
         }, error = object: ErrorCompletion {
             override fun errorCompletion(errorMessage: String) {
             }
-        })*/
+        })
 
         jsonManager.execute(BuildConfig.MADRID_ACTIVITIES_SERVER_URL,
                 success =  object: SuccessCompletion<String> {
@@ -66,7 +64,6 @@ class RepositoryImpl(context: Context): Repository {
                         var activitiesResponseEntity: ShoptivitiesResponseEntity
                         try {
                             activitiesResponseEntity = parser.parse<ShoptivitiesResponseEntity>(e)
-                            Log.d("CORIO PARSE RESULT", "" + activitiesResponseEntity.result)
                         } catch (e: InvalidFormatException) {
                             error("ERROR PARSING ACTIVITIES")
                             return
@@ -74,7 +71,6 @@ class RepositoryImpl(context: Context): Repository {
                         // store result in cache
                         cache.saveAllShoptivities(activitiesResponseEntity.result, success = {
                             success(activitiesResponseEntity.result)
-                            Log.d("CORIO", "REPOIMPL EXECUTE CACHESAVEALL")
                         }, error = {
                             error("Something happened on the way to Activities heaven!")
                         })
@@ -83,7 +79,6 @@ class RepositoryImpl(context: Context): Repository {
             override fun errorCompletion(errorMessage: String) {
             }
         })
-        Log.d("CORIO", "REPOSITORY POPULATECACHE")
     }
 
 

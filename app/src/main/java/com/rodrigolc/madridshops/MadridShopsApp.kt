@@ -25,7 +25,7 @@ class MadridShopsApp: MultiDexApplication() {
 
         allShopsInteractor.execute(object: SuccessCompletion<Shoptivities> {
             override fun successCompletion(shoptivities: Shoptivities) {
-                Log.d("Shoptivities", "Count: " + shoptivities.count())
+                //Log.d("Shoptivities", "Count: " + shoptivities.count())
 
                 shoptivities.shoptivities.forEach { Log.d("Shoptivity", it.name) }
             }
