@@ -49,8 +49,8 @@ class MainActivity : AppCompatActivity() {
             override fun successCompletion(shoptivities: Shoptivities) {
                 initializeMap(shoptivities)
                 Log.d("Shoptivities", "Count: " + shoptivities.count())
-                Log.d("CORIO TYPE", ""+ shoptivities.get(0).type)
-                Log.d("CORIO TYPE", ""+ shoptivities.get(55).type)
+                //Log.d("CORIO TYPE", ""+ shoptivities.get(0).type)
+                //Log.d("CORIO TYPE", ""+ shoptivities.get(55).type)
             }
 
         }, object: ErrorCompletion{

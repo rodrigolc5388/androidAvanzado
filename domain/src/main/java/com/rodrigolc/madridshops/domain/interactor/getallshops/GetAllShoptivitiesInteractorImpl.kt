@@ -18,15 +18,44 @@ class GetAllShoptivitiesInteractorImplementation(context: Context): GetAllShopti
 
     override fun execute(success: SuccessCompletion<Shoptivities>, error: ErrorCompletion) {
         repository.getAllShoptivities(success = {
-            val shoptivitiesList: Shoptivities = entityMapper(it)
-            success.successCompletion(shoptivitiesList)
+            val shopsList: Shoptivities = shopsEntityMapper(it)
+            success.successCompletion(shopsList)
+        }, error = {
+            error(it)
+        })
+
+        repository.getAllShoptivities(success = {
+            val activitiesList: Shoptivities = activitiesEntityMapper(it)
+            success.successCompletion(activitiesList)
         }, error = {
             error(it)
         })
     }
 }
 
-private fun entityMapper(list: List<ShoptivityEntity>): Shoptivities {
+private fun shopsEntityMapper(list: List<ShoptivityEntity>): Shoptivities {
+    val tempList = ArrayList<Shoptivity>()
+
+    list.forEach {
+        val shoptivity = Shoptivity(
+                it.id.toInt(),
+                it.name,
+                it.address,
+                it.description_en,
+                it.img, it.logo,
+                it.openingHoursEn,
+                parseStringToDouble(it.longitude),
+                parseStringToDouble(it.latitude),
+                //it.type!!)
+                "shop")
+        tempList.add(shoptivity)
+    }
+
+    val shoptivities = Shoptivities(tempList)
+    return shoptivities
+}
+
+private fun activitiesEntityMapper(list: List<ShoptivityEntity>): Shoptivities {
     val tempList = ArrayList<Shoptivity>()
 
     list.forEach {

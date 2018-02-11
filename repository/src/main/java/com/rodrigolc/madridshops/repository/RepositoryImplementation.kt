@@ -17,6 +17,7 @@ class RepositoryImpl(context: Context): Repository {
 
     private val weakContext = WeakReference<Context>(context)
     private val cache: Cache = CacheImpl(weakContext.get()!!)
+    private val jsonManager: GetJsonManager = GetJsonManagerVolleyImpl(weakContext.get() !!)
 
     override fun getAllShoptivities(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
         // Read all Shoptivities from cache
@@ -26,14 +27,13 @@ class RepositoryImpl(context: Context): Repository {
 
         }, error = {
             // if no Shoptivities in cache --> network
-            populateCache(success, error)
+            populateCacheWithShops(success, error)
+            populateCacheWithActivities(success, error)
         })
     }
 
-    private fun populateCache(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
+    private fun populateCacheWithShops(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
         // perform network request
-
-        val jsonManager: GetJsonManager = GetJsonManagerVolleyImpl(weakContext.get() !!)
         jsonManager.execute(BuildConfig.MADRID_SHOPS_SERVER_URL, success =  object: SuccessCompletion<String> {
             override fun successCompletion(e: String) {
                 val parser = JsonEntitiesParser()
@@ -55,9 +55,11 @@ class RepositoryImpl(context: Context): Repository {
             override fun errorCompletion(errorMessage: String) {
             }
         })
+    }
 
+    private fun populateCacheWithActivities(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
         jsonManager.execute(BuildConfig.MADRID_ACTIVITIES_SERVER_URL,
-                success =  object: SuccessCompletion<String> {
+                success = object : SuccessCompletion<String> {
                     override fun successCompletion(e: String) {
                         val parser = JsonEntitiesParser()
                         var activitiesResponseEntity: ShoptivitiesResponseEntity
@@ -74,7 +76,7 @@ class RepositoryImpl(context: Context): Repository {
                             error("Something happened on the way to Activities heaven!")
                         })
                     }
-        }, error = object: ErrorCompletion {
+                }, error = object : ErrorCompletion {
             override fun errorCompletion(errorMessage: String) {
             }
         })
