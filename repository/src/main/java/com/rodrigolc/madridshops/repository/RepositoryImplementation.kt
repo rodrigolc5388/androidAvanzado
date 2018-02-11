@@ -26,7 +26,6 @@ class RepositoryImpl(context: Context): Repository {
 
         }, error = {
             // if no Shoptivities in cache --> network
-
             populateCache(success, error)
         })
     }

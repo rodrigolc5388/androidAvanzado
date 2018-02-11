@@ -11,8 +11,8 @@ data class Shoptivity(
         val image: String,
         val logo: String,
         val openingHours: String,
-        val longitude: Float?,
-        val latitude: Float?,
+        val longitude: Double?,
+        val latitude: Double?,
         val type: String
         ) {
     init {

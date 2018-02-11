@@ -37,8 +37,8 @@ private fun entityMapper(list: List<ShoptivityEntity>): Shoptivities {
                 it.description_en,
                 it.img, it.logo,
                 it.openingHoursEn,
-                parseStringToFloat(it.longitude)!!,
-                parseStringToFloat(it.latitude)!!,
+                parseStringToDouble(it.longitude),
+                parseStringToDouble(it.latitude),
                 //it.type!!)
                 "activity")
         tempList.add(shoptivity)
@@ -48,15 +48,16 @@ private fun entityMapper(list: List<ShoptivityEntity>): Shoptivities {
     return shoptivities
 }
 
-private fun parseStringToFloat(value: String): Float? {
-    var coordinate: Float? = null
+
+private fun parseStringToDouble(value: String): Double? {
+    var coordinate: Double? = null
 
     val parsedString: String = value.replace(",", "").replace(" ", "")
 
     try {
-        coordinate = parsedString.toFloat()
+        coordinate = parsedString.toDouble()
     } catch (e: Exception) {
-        Log.d("PARSE ERROR", "💩 Error parsing lat/long string to float.")
+        Log.d("PARSE ERROR", "💩 Error parsing to double: " + value.toString())
     }
 
     return coordinate
