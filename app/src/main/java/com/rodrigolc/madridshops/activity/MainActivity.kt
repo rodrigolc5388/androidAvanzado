@@ -40,8 +40,8 @@ class MainActivity : AppCompatActivity() {
         Log.d("App", "onCreate MainActivity")
 
 
-        //setupMap()
-        getShoptivitiesForType("activity")
+        setupMap()
+        //getShoptivitiesForType("activity")
         listFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment
     }
 
@@ -50,7 +50,8 @@ class MainActivity : AppCompatActivity() {
             override fun successCompletion(shoptivities: Shoptivities) {
                 initializeMap(shoptivities)
                 Log.d("Shoptivities", "Count: " + shoptivities.count())
-                Log.d("Shoptivities", "Count: " + shoptivities.get(0).type)
+                Log.d("Shoptivities", "Name: " + shoptivities.get(0).name)
+                Log.d("Shoptivities", "Type: " + shoptivities.get(0).type)
             }
         }, object : ErrorCompletion {
             override fun errorCompletion(errorMessage: String) {
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                 override fun successCompletion(shoptivities: Shoptivities) {
                     initializeMap(shoptivities)
                     Log.d("CORIO TYPE", "TYPE" + shoptivities.get(0).type)
-                    Log.d("CORIO TYPE", "TYPE" + shoptivities.get(0).name)
+                    Log.d("CORIO NAME", "NAME" + shoptivities.get(0).name)
                 }
             },
             object : ErrorCompletion {

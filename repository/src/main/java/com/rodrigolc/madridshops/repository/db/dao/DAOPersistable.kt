@@ -11,7 +11,7 @@ interface DAOReadOperations<T>{
 
 
 interface DAOWriteOprations<T>{
-    fun insert(element: T): Long
+    fun insert(type: String, element: T): Long
     fun update(id: Long, element: T): Long
     // Deletes the element passed from DB
     fun delete(element: T): Long

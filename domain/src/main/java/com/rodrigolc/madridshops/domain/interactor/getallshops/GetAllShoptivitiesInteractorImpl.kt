@@ -20,23 +20,23 @@ class GetAllShoptivitiesInteractorImplementation(context: Context): GetAllShopti
 
     override fun execute(success: SuccessCompletion<Shoptivities>, error: ErrorCompletion) {
         repository.getAllShoptivities(success = {
-            val shopsList: Shoptivities = shopsEntityMapper(it)
-            success.successCompletion(shopsList)
+            val shoptivitiesList: Shoptivities = entityMapper(it)
+            success.successCompletion(shoptivitiesList)
         }, error = {
             error(it)
         })
 
-        repository.getAllShoptivities(success = {
-            val activitiesList: Shoptivities = activitiesEntityMapper(it)
+        /*repository.getAllShoptivities(success = {
+            val activitiesList: Shoptivities = entityMapper(it)
             success.successCompletion(activitiesList)
         }, error = {
             error(it)
-        })
+        })*/
     }
 
     override fun executeForType(type: String, success: SuccessCompletion<Shoptivities>, error: ErrorCompletion) {
         repository.getAllShoptivitiesForType(type, success = {
-            val shoptivitiesList: Shoptivities = shoptivitiesEntityMapper(type, it)
+            val shoptivitiesList: Shoptivities = entityMapper(it)
             success.successCompletion(shoptivitiesList)
         }, error = {
             error(it)
@@ -45,7 +45,7 @@ class GetAllShoptivitiesInteractorImplementation(context: Context): GetAllShopti
 }
 
 
-private fun shopsEntityMapper(list: List<ShoptivityEntity>): Shoptivities {
+private fun entityMapper(list: List<ShoptivityEntity>): Shoptivities {
     val tempList = ArrayList<Shoptivity>()
 
     list.forEach {
@@ -58,7 +58,9 @@ private fun shopsEntityMapper(list: List<ShoptivityEntity>): Shoptivities {
                 it.openingHoursEn,
                 parseStringToDouble(it.longitude),
                 parseStringToDouble(it.latitude),
-                "shop")
+                //"shop")
+                it.type.toString())
+        Log.d("CORIO", "GetAllShopInteImpl" + shoptivity.type)
         tempList.add(shoptivity)
     }
 
@@ -66,7 +68,7 @@ private fun shopsEntityMapper(list: List<ShoptivityEntity>): Shoptivities {
     return shoptivities
 }
 
-private fun activitiesEntityMapper(list: List<ShoptivityEntity>): Shoptivities {
+/*private fun activitiesEntityMapper(list: List<ShoptivityEntity>): Shoptivities {
     val tempList = ArrayList<Shoptivity>()
 
     list.forEach {
@@ -85,9 +87,9 @@ private fun activitiesEntityMapper(list: List<ShoptivityEntity>): Shoptivities {
 
     val shoptivities = Shoptivities(tempList)
     return shoptivities
-}
+}*/
 
-private fun shoptivitiesEntityMapper(type: String, list: List<ShoptivityEntity>): Shoptivities {
+/*private fun shoptivitiesEntityMapper(type: String, list: List<ShoptivityEntity>): Shoptivities {
     val tempList = ArrayList<Shoptivity>()
 
     list.forEach {
@@ -106,7 +108,7 @@ private fun shoptivitiesEntityMapper(type: String, list: List<ShoptivityEntity>)
 
     val shoptivities = Shoptivities(tempList)
     return shoptivities
-}
+}*/
 
 private fun parseStringToDouble(value: String): Double? {
     var coordinate: Double? = null

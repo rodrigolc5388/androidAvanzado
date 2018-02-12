@@ -28,8 +28,8 @@ class RepositoryImpl(context: Context): Repository {
 
         }, error = {
             // if no Shoptivities in cache --> network
-            populateCacheWithShops(success, error)
-            populateCacheWithActivities(success, error)
+            populateCacheWithShops("shop", success, error)
+            populateCacheWithActivities("activity", success, error)
         })
     }
 
@@ -47,7 +47,7 @@ class RepositoryImpl(context: Context): Repository {
         cache.deleteAllShoptivities(success, error)
     }
 
-    private fun populateCacheWithShops(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
+    private fun populateCacheWithShops(type: String, success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
         // perform network request
         jsonManager.execute(BuildConfig.MADRID_SHOPS_SERVER_URL, success =  object: SuccessCompletion<String> {
             override fun successCompletion(e: String) {
@@ -60,7 +60,7 @@ class RepositoryImpl(context: Context): Repository {
                     return
                 }
                 // store result in cache
-                cache.saveAllShoptivities(shopsResponseEntity.result, success = {
+                cache.saveAllShoptivities(type, shopsResponseEntity.result, success = {
                     success(shopsResponseEntity.result)
                 }, error = {
                     error("Something happened on the way to Shops heaven!")
@@ -72,7 +72,7 @@ class RepositoryImpl(context: Context): Repository {
         })
     }
 
-    private fun populateCacheWithActivities(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
+    private fun populateCacheWithActivities(type: String, success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
         jsonManager.execute(BuildConfig.MADRID_ACTIVITIES_SERVER_URL,
                 success = object : SuccessCompletion<String> {
                     override fun successCompletion(e: String) {
@@ -85,7 +85,7 @@ class RepositoryImpl(context: Context): Repository {
                             return
                         }
                         // store result in cache
-                        cache.saveAllShoptivities(activitiesResponseEntity.result, success = {
+                        cache.saveAllShoptivities(type, activitiesResponseEntity.result, success = {
                             success(activitiesResponseEntity.result)
                         }, error = {
                             error("Something happened on the way to Activities heaven!")

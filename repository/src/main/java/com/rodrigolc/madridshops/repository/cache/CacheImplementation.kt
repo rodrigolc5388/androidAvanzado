@@ -38,10 +38,10 @@ internal class CacheImpl(context: Context): Cache {
         }).run()
     }
 
-    override fun saveAllShoptivities(shoptivities: List<ShoptivityEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit) {
+    override fun saveAllShoptivities(type: String, shoptivities: List<ShoptivityEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit) {
         Thread(Runnable {
             try {
-                shoptivities.forEach { ShoptivityDAO(cacheDBHelper()).insert(it) }
+                shoptivities.forEach { ShoptivityDAO(cacheDBHelper()).insert(type, it) }
 
                 DispatchOnMainThreadRun(Runnable {
                     success()

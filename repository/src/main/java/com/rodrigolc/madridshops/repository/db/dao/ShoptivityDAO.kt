@@ -3,7 +3,6 @@ package com.rodrigolc.madridshops.repository.db.dao
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.util.Log
 import com.rodrigolc.madridshops.repository.db.DBConstants
 import com.rodrigolc.madridshops.repository.db.DBHelper
 import com.rodrigolc.madridshops.repository.model.ShoptivityEntity
@@ -13,11 +12,11 @@ internal class ShoptivityDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityE
     private val dbReadOnlyConnection: SQLiteDatabase = dbHelper.readableDatabase
     private val dbReadWriteConnection: SQLiteDatabase = dbHelper.writableDatabase
 
-    override fun insert(element: ShoptivityEntity): Long {
+    override fun insert(type: String, element: ShoptivityEntity): Long {
         var id: Long = 0
 
-        id = dbReadWriteConnection.insert(DBConstants.TABLE_SHOPTIVITIES, null, contentValues(element))
-        Log.d("ID SHOPTIVITY", id.toString())
+        id = dbReadWriteConnection.insert(DBConstants.TABLE_SHOPTIVITIES, null, contentValues(type, element))
+        //Log.d("ID SHOPTIVITY", id.toString())
         return id
     }
 
@@ -116,7 +115,7 @@ internal class ShoptivityDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityE
     // Usar element.databaseId o el parámetro id??
     override fun update(id: Long, element: ShoptivityEntity): Long {
         val numberOfRecordsUpdated = dbReadWriteConnection.update(DBConstants.TABLE_SHOPTIVITIES,
-                contentValues(element),
+                contentValues(element.type.toString(), element),
                 DBConstants.KEY_SHOPTIVITY_DATABASE_ID + " = ?",
                 arrayOf(element.databaseId.toString())).toLong()
         //(id.toString())
@@ -125,7 +124,7 @@ internal class ShoptivityDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityE
     }
 
 
-    fun contentValues(shoptivityEntity: ShoptivityEntity): ContentValues {
+    fun contentValues(type: String, shoptivityEntity: ShoptivityEntity): ContentValues {
         val content = ContentValues()
 
         //content.put(DBConstants.KEY_SHOPTIVITY_DATABASE_ID, shoptivityEntity.databaseId)
@@ -141,7 +140,8 @@ internal class ShoptivityDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityE
         content.put(DBConstants.KEY_SHOPTIVITY_LONGITUDE, shoptivityEntity.longitude)
         content.put(DBConstants.KEY_SHOPTIVITY_OPENING_HOURS_EN, shoptivityEntity.openingHoursEn)
         content.put(DBConstants.KEY_SHOPTIVITY_OPENING_HOURS_ES, shoptivityEntity.openingHoursEs)
-        content.put(DBConstants.KEY_SHOPTIVITY_TYPE, shoptivityEntity.type)
+        //content.put(DBConstants.KEY_SHOPTIVITY_TYPE, shoptivityEntity.type)
+        content.put(DBConstants.KEY_SHOPTIVITY_TYPE, type)
 
         return content
     }
