@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         Log.d("App", "onCreate MainActivity")
 
 
-        setupMap()
+        //setupMap()
         getShoptivitiesForType("activity")
         listFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment
     }
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         getAllShopsInteractor.executeForType(type,
             object : SuccessCompletion<Shoptivities> {
                 override fun successCompletion(shoptivities: Shoptivities) {
-                    //initializeMap(shoptivities)
+                    initializeMap(shoptivities)
                     Log.d("CORIO TYPE", "TYPE" + shoptivities.get(0).type)
                     Log.d("CORIO TYPE", "TYPE" + shoptivities.get(0).name)
                 }
