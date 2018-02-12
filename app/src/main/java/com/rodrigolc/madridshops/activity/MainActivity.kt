@@ -30,6 +30,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     var listFragment: ListFragment? = null
+    val getAllShopsInteractor: GetAllShoptivitiesInteractor = GetAllShoptivitiesInteractorImplementation(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,13 +40,13 @@ class MainActivity : AppCompatActivity() {
         Log.d("App", "onCreate MainActivity")
 
 
-        setupMap()
+        //setupMap()
+        setUpMapWithType("activity")
         listFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment
     }
 
     private fun setupMap() {
-        val getAllShopsInteractor: GetAllShoptivitiesInteractor = GetAllShoptivitiesInteractorImplementation(this)
-        getAllShopsInteractor.execute(object: SuccessCompletion<Shoptivities>{
+        getAllShopsInteractor.execute(object : SuccessCompletion<Shoptivities> {
             override fun successCompletion(shoptivities: Shoptivities) {
                 initializeMap(shoptivities)
                 Log.d("Shoptivities", "Count: " + shoptivities.count())
@@ -53,12 +54,32 @@ class MainActivity : AppCompatActivity() {
                 //Log.d("CORIO TYPE", ""+ shoptivities.get(55).type)
             }
 
-        }, object: ErrorCompletion{
+        }, object : ErrorCompletion {
             override fun errorCompletion(errorMessage: String) {
                 Toast.makeText(baseContext, "Error loading", Toast.LENGTH_LONG).show()
             }
         })
     }
+
+    private fun setUpMapWithType(type: String) {
+
+        getAllShopsInteractor.executeForType(type,
+                object : SuccessCompletion<Shoptivities> {
+                    override fun successCompletion(shoptivities: Shoptivities) {
+                        initializeMap(shoptivities)
+                        //Log.d("CORIO TYPE", "" + shoptivities.get(0).type)
+                        //Log.d("CORIO TYPE", "" + shoptivities.get(0).name)
+                    }
+
+                },
+                object : ErrorCompletion {
+                    override fun errorCompletion(errorMessage: String) {
+                        Toast.makeText(baseContext, "Error loading", Toast.LENGTH_LONG).show()
+                    }
+                })
+    }
+
+
 
     private fun initializeMap(shoptivities: Shoptivities) {
         val mapFragment = supportFragmentManager.findFragmentById(R.id.activity_main_map_fragment) as SupportMapFragment

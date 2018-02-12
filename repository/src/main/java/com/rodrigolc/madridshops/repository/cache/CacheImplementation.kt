@@ -10,12 +10,24 @@ import java.lang.ref.WeakReference
 
 
 internal class CacheImpl(context: Context): Cache {
-
     val context = WeakReference<Context>(context)
 
     override fun getAllShoptivities(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
         Thread(Runnable {
             var shoptivities = ShoptivityDAO(cacheDBHelper()).query()
+            DispatchOnMainThreadRun(Runnable {
+                if (shoptivities.count() > 0) {
+                    success(shoptivities)
+                } else {
+                    error("No shoptivities")
+                }
+            })
+        }).run()
+    }
+
+    override fun getAllShoptivitiesForType(type: String, success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
+        Thread(Runnable {
+            var shoptivities = ShoptivityDAO(cacheDBHelper()).queryType(type)
             DispatchOnMainThreadRun(Runnable {
                 if (shoptivities.count() > 0) {
                     success(shoptivities)

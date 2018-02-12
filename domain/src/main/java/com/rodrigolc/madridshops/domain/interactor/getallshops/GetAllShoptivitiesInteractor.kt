@@ -7,4 +7,5 @@ import com.rodrigolc.madridshops.domain.model.Shoptivities
 
 interface GetAllShoptivitiesInteractor {
     fun execute(success: SuccessCompletion<Shoptivities>, error: ErrorCompletion)
+    fun executeForType(type: String, success: SuccessCompletion<Shoptivities>, error: ErrorCompletion)
 }

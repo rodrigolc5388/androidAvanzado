@@ -15,6 +15,7 @@ import java.lang.ref.WeakReference
 
 class RepositoryImpl(context: Context): Repository {
 
+
     private val weakContext = WeakReference<Context>(context)
     private val cache: Cache = CacheImpl(weakContext.get()!!)
     private val jsonManager: GetJsonManager = GetJsonManagerVolleyImpl(weakContext.get() !!)
@@ -30,6 +31,20 @@ class RepositoryImpl(context: Context): Repository {
             populateCacheWithShops(success, error)
             populateCacheWithActivities(success, error)
         })
+    }
+
+    override fun getAllShoptivitiesForType(type: String, success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
+
+        cache.getAllShoptivitiesForType(type, success = {
+            success(it)
+        }, error = {
+            error("Error getting Shoptivities of type: " + type)
+        })
+    }
+
+    override fun deleteAllShoptivities(success: () -> Unit, error: (errorMessage: String) -> Unit) {
+
+        cache.deleteAllShoptivities(success, error)
     }
 
     private fun populateCacheWithShops(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
@@ -82,9 +97,4 @@ class RepositoryImpl(context: Context): Repository {
         })
     }
 
-
-    override fun deleteAllShoptivities(success: () -> Unit, error: (errorMessage: String) -> Unit) {
-
-        cache.deleteAllShoptivities(success, error)
-    }
 }

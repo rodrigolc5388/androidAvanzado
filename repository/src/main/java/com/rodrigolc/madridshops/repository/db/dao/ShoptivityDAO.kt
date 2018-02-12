@@ -72,6 +72,35 @@ internal class ShoptivityDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityE
         return queryResult
     }
 
+    override fun queryType(type: String): List<ShoptivityEntity> {
+        val queryResult = ArrayList<ShoptivityEntity>()
+
+        val cursor = dbReadOnlyConnection.query(DBConstants.TABLE_SHOPTIVITIES,
+                arrayOf(DBConstants.KEY_SHOPTIVITY_TYPE),
+                DBConstants.KEY_SHOPTIVITY_TYPE + " = ?",
+                arrayOf(type),
+                "",
+                "",
+                DBConstants.KEY_SHOPTIVITY_NAME
+                )
+
+
+        /*(DBConstants.TABLE_SHOPTIVITIES,
+                DBConstants.ALL_COLUMNS,
+                DBConstants.KEY_SHOPTIVITY_TYPE + " = ?",
+                arrayOf(type),
+                "",
+                "",
+                DBConstants.KEY_SHOPTIVITY_NAME)*/
+
+        while (cursor.moveToNext()){
+            val se = entityFromCursor(cursor)
+            queryResult.add(se!!)
+        }
+
+        return queryResult
+    }
+
     override fun queryCursor(id: Long): Cursor {
         val cursor = dbReadOnlyConnection.query(DBConstants.TABLE_SHOPTIVITIES,
                 DBConstants.ALL_COLUMNS,
