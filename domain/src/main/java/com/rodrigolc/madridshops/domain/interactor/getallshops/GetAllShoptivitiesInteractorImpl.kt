@@ -37,6 +37,7 @@ class GetAllShoptivitiesInteractorImplementation(context: Context): GetAllShopti
     override fun executeForType(type: String, success: SuccessCompletion<Shoptivities>, error: ErrorCompletion) {
         repository.getAllShoptivitiesForType(type, success = {
             val shoptivitiesList: Shoptivities = shoptivitiesEntityMapper(type, it)
+            success.successCompletion(shoptivitiesList)
         }, error = {
             error(it)
         })

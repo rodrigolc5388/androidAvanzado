@@ -40,8 +40,8 @@ class MainActivity : AppCompatActivity() {
         Log.d("App", "onCreate MainActivity")
 
 
-        //setupMap()
-        setUpMapWithType("activity")
+        setupMap()
+        getShoptivitiesForType("activity")
         listFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment
     }
 
@@ -50,10 +50,8 @@ class MainActivity : AppCompatActivity() {
             override fun successCompletion(shoptivities: Shoptivities) {
                 initializeMap(shoptivities)
                 Log.d("Shoptivities", "Count: " + shoptivities.count())
-                //Log.d("CORIO TYPE", ""+ shoptivities.get(0).type)
-                //Log.d("CORIO TYPE", ""+ shoptivities.get(55).type)
+                Log.d("Shoptivities", "Count: " + shoptivities.get(0).type)
             }
-
         }, object : ErrorCompletion {
             override fun errorCompletion(errorMessage: String) {
                 Toast.makeText(baseContext, "Error loading", Toast.LENGTH_LONG).show()
@@ -61,22 +59,20 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun setUpMapWithType(type: String) {
-
+    private fun getShoptivitiesForType(type: String) {
         getAllShopsInteractor.executeForType(type,
-                object : SuccessCompletion<Shoptivities> {
-                    override fun successCompletion(shoptivities: Shoptivities) {
-                        initializeMap(shoptivities)
-                        //Log.d("CORIO TYPE", "" + shoptivities.get(0).type)
-                        //Log.d("CORIO TYPE", "" + shoptivities.get(0).name)
-                    }
-
-                },
-                object : ErrorCompletion {
-                    override fun errorCompletion(errorMessage: String) {
-                        Toast.makeText(baseContext, "Error loading", Toast.LENGTH_LONG).show()
-                    }
-                })
+            object : SuccessCompletion<Shoptivities> {
+                override fun successCompletion(shoptivities: Shoptivities) {
+                    //initializeMap(shoptivities)
+                    Log.d("CORIO TYPE", "TYPE" + shoptivities.get(0).type)
+                    Log.d("CORIO TYPE", "TYPE" + shoptivities.get(0).name)
+                }
+            },
+            object : ErrorCompletion {
+                override fun errorCompletion(errorMessage: String) {
+                    Toast.makeText(baseContext, "Error loading", Toast.LENGTH_LONG).show()
+                }
+            })
     }
 
 
