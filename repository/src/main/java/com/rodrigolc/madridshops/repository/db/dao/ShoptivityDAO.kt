@@ -3,6 +3,7 @@ package com.rodrigolc.madridshops.repository.db.dao
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.util.Log
 import com.rodrigolc.madridshops.repository.db.DBConstants
 import com.rodrigolc.madridshops.repository.db.DBHelper
 import com.rodrigolc.madridshops.repository.model.ShoptivityEntity
@@ -13,6 +14,7 @@ internal class ShoptivityDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityE
     private val dbReadWriteConnection: SQLiteDatabase = dbHelper.writableDatabase
 
     override fun insert(type: String, element: ShoptivityEntity): Long {
+        Log.d("CORIO", "DAO INSERT " + type)
         var id: Long = 0
 
         id = dbReadWriteConnection.insert(DBConstants.TABLE_SHOPTIVITIES, null, contentValues(type, element))
@@ -126,6 +128,7 @@ internal class ShoptivityDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityE
 
     fun contentValues(type: String, shoptivityEntity: ShoptivityEntity): ContentValues {
         val content = ContentValues()
+        Log.d("CORIO", "DAO CONTENTVALUES " + type)
 
         //content.put(DBConstants.KEY_SHOPTIVITY_DATABASE_ID, shoptivityEntity.databaseId)
         content.put(DBConstants.KEY_SHOPTIVITY_ID_JSON, shoptivityEntity.id)

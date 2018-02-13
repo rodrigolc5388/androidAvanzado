@@ -60,7 +60,7 @@ private fun entityMapper(list: List<ShoptivityEntity>): Shoptivities {
                 parseStringToDouble(it.latitude),
                 //"shop")
                 it.type.toString())
-        Log.d("CORIO", "GetAllShopInteImpl" + shoptivity.type)
+        Log.d("CORIO", "GetAllShopInteImpl " + shoptivity.type)
         tempList.add(shoptivity)
     }
 
