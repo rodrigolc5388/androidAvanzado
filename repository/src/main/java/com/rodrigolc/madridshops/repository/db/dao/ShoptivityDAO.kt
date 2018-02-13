@@ -18,7 +18,6 @@ internal class ShoptivityDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityE
         var id: Long = 0
 
         id = dbReadWriteConnection.insert(DBConstants.TABLE_SHOPTIVITIES, null, contentValues(type, element))
-        //Log.d("ID SHOPTIVITY", id.toString())
         return id
     }
 
@@ -84,19 +83,6 @@ internal class ShoptivityDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityE
                 "",
                 DBConstants.KEY_SHOPTIVITY_NAME)
 
-
-        /*(DBConstants.TABLE_SHOPTIVITIES,
-                arrayOf(DBConstants.KEY_SHOPTIVITY_TYPE),
-                DBConstants.KEY_SHOPTIVITY_TYPE + " = ?",
-                arrayOf(type),
-                "",
-                "",
-                DBConstants.KEY_SHOPTIVITY_NAME
-                )*/
-
-
-
-
         while (cursor.moveToNext()){
             val se = entityFromCursor(cursor)
             queryResult.add(se!!)
@@ -133,7 +119,6 @@ internal class ShoptivityDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityE
         val content = ContentValues()
         Log.d("CORIO", "DAO CONTENTVALUES " + type)
 
-        //content.put(DBConstants.KEY_SHOPTIVITY_DATABASE_ID, shoptivityEntity.databaseId)
         content.put(DBConstants.KEY_SHOPTIVITY_ID_JSON, shoptivityEntity.id)
         content.put(DBConstants.KEY_SHOPTIVITY_NAME, shoptivityEntity.name)
         content.put(DBConstants.KEY_SHOPTIVITY_IMAGE_URL, shoptivityEntity.img)
@@ -146,7 +131,6 @@ internal class ShoptivityDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityE
         content.put(DBConstants.KEY_SHOPTIVITY_LONGITUDE, shoptivityEntity.longitude)
         content.put(DBConstants.KEY_SHOPTIVITY_OPENING_HOURS_EN, shoptivityEntity.openingHoursEn)
         content.put(DBConstants.KEY_SHOPTIVITY_OPENING_HOURS_ES, shoptivityEntity.openingHoursEs)
-        //content.put(DBConstants.KEY_SHOPTIVITY_TYPE, shoptivityEntity.type)
         content.put(DBConstants.KEY_SHOPTIVITY_TYPE, type)
 
         return content

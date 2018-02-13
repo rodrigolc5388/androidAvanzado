@@ -1,7 +1,6 @@
 package com.rodrigolc.madridshops.repository
 
 import android.content.Context
-import android.util.Log
 import com.fasterxml.jackson.databind.exc.InvalidFormatException
 import com.rodrigolc.madridshops.repository.cache.Cache
 import com.rodrigolc.madridshops.repository.cache.CacheImpl
@@ -74,7 +73,6 @@ class RepositoryImpl(context: Context): Repository {
     }
 
     private fun populateCacheWithActivities(type: String, success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
-        Log.d("CORIO", "REPOIMPL POPULATE TYPE " + type)
         jsonManager.execute(BuildConfig.MADRID_ACTIVITIES_SERVER_URL,
                 success = object : SuccessCompletion<String> {
                     override fun successCompletion(e: String) {

@@ -25,13 +25,6 @@ class GetAllShoptivitiesInteractorImplementation(context: Context): GetAllShopti
         }, error = {
             error(it)
         })
-
-        /*repository.getAllShoptivities(success = {
-            val activitiesList: Shoptivities = entityMapper(it)
-            success.successCompletion(activitiesList)
-        }, error = {
-            error(it)
-        })*/
     }
 
     override fun executeForType(type: String, success: SuccessCompletion<Shoptivities>, error: ErrorCompletion) {
@@ -58,57 +51,13 @@ private fun entityMapper(list: List<ShoptivityEntity>): Shoptivities {
                 it.openingHoursEn,
                 parseStringToDouble(it.longitude),
                 parseStringToDouble(it.latitude),
-                //"shop")
                 it.type.toString())
-        Log.d("CORIO", "GetAllShopInteImpl " + shoptivity.type)
         tempList.add(shoptivity)
     }
 
     val shoptivities = Shoptivities(tempList)
     return shoptivities
 }
-
-/*private fun activitiesEntityMapper(list: List<ShoptivityEntity>): Shoptivities {
-    val tempList = ArrayList<Shoptivity>()
-
-    list.forEach {
-        val shoptivity = Shoptivity(
-                it.id.toInt(),
-                it.name,
-                it.address,
-                it.description_en,
-                it.img, it.logo,
-                it.openingHoursEn,
-                parseStringToDouble(it.longitude),
-                parseStringToDouble(it.latitude),
-                "activity")
-        tempList.add(shoptivity)
-    }
-
-    val shoptivities = Shoptivities(tempList)
-    return shoptivities
-}*/
-
-/*private fun shoptivitiesEntityMapper(type: String, list: List<ShoptivityEntity>): Shoptivities {
-    val tempList = ArrayList<Shoptivity>()
-
-    list.forEach {
-        val shoptivity = Shoptivity(
-                it.id.toInt(),
-                it.name,
-                it.address,
-                it.description_en,
-                it.img, it.logo,
-                it.openingHoursEn,
-                parseStringToDouble(it.longitude),
-                parseStringToDouble(it.latitude),
-                type)
-        tempList.add(shoptivity)
-    }
-
-    val shoptivities = Shoptivities(tempList)
-    return shoptivities
-}*/
 
 private fun parseStringToDouble(value: String): Double? {
     var coordinate: Double? = null
@@ -118,7 +67,7 @@ private fun parseStringToDouble(value: String): Double? {
     try {
         coordinate = parsedString.toDouble()
     } catch (e: Exception) {
-        Log.d("PARSE ERROR", "💩 Error parsing to double: " + value.toString())
+        Log.d("PARSE ERROR", "💩 Error parsing to double: " + value)
     }
 
     return coordinate
