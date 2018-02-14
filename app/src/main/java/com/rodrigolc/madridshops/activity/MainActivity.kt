@@ -48,8 +48,8 @@ class MainActivity : AppCompatActivity() {
     private fun setupMap() {
         getAllShopsInteractor.execute(object : SuccessCompletion<Shoptivities> {
             override fun successCompletion(shoptivities: Shoptivities) {
-                initializeMap(shoptivities)
-                Log.d("Shoptivities", "Count: " + shoptivities.count())
+                //initializeMap(shoptivities)
+                //Log.d("Shoptivities", "Count: " + shoptivities.count())
 
             }
         }, object : ErrorCompletion {
@@ -63,11 +63,7 @@ class MainActivity : AppCompatActivity() {
         getAllShopsInteractor.executeForType(type,
             object : SuccessCompletion<Shoptivities> {
                 override fun successCompletion(shoptivities: Shoptivities) {
-                    //initializeMap(shoptivities)
-                    Log.d("CORIO NAME", "Name: " + shoptivities.get(0).name)
-                    Log.d("CORIO TYPE", "Type: " + shoptivities.get(0).type)
-                    Log.d("CORIO NAME", "Name: " + shoptivities.get(25).name)
-                    Log.d("CORIO TYPE", "Type: " + shoptivities.get(25).type)
+                    initializeMap(shoptivities)
                 }
             },
             object : ErrorCompletion {
@@ -90,6 +86,7 @@ class MainActivity : AppCompatActivity() {
             showUserPosition(baseContext, it)
             map = it
             addAllPins(shoptivities)
+            
         })
     }
 
@@ -133,7 +130,7 @@ class MainActivity : AppCompatActivity() {
     fun addAllPins(shoptivities: Shoptivities){
         for (i in 0 until shoptivities.count()){
             val shop = shoptivities.get(i)
-            addPin(map!!, 40.416775, -3.703790, shop.name )
+            addPin(map!!, shop.latitude!!, shop.longitude!!, shop.name)
 
         }
     }
