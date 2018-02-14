@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/info_window_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/ic_launcher_background"/>
+    
+    <TextView
+        android:id="@+id/info_window_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/info_window_image"
+        android:layout_alignParentTop="true"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        tools:text="MARKER INFO WINDOW TITLE"/>
+
+    <TextView
+        android:id="@+id/info_window_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/info_window_image"
+        android:layout_below="@id/info_window_title"
+        android:maxLines="2"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:paddingTop="5dp"
+        android:textSize="15sp"
+        android:textStyle="italic"
+        android:textColor="@android:color/darker_gray"
+        tools:text="MARKER INFO WINDOW SUBTITLE"/>
+
+</RelativeLayout>

@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
             showUserPosition(baseContext, it)
             map = it
             addAllPins(shoptivities)
-            
+
         })
     }
 
