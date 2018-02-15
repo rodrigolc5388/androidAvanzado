@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         Log.d("App", "onCreate MainActivity")
 
 
-        setupMap()
+        //setupMap()
         getShoptivitiesForType("activity")
         //getShoptivitiesForType("shop")
         listFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment
