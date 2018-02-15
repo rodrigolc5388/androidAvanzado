@@ -6,17 +6,17 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="5dp"
-    tools:context=".adapter.InfoWindowAdapter">
+    >
 
     <ImageView
-        android:id="@+id/info_window_image"
+        android:id="@+id/cell_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:scaleType="centerCrop"
         tools:src="@drawable/ic_launcher_background"/>
     
     <TextView
-        android:id="@+id/info_window_title"
+        android:id="@+id/cell_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/info_window_image"
@@ -29,7 +29,7 @@
         tools:text="CELL TITLE"/>
 
     <TextView
-        android:id="@+id/info_window_subtitle"
+        android:id="@+id/cell_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/info_window_image"
