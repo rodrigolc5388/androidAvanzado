@@ -19,11 +19,13 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.rodrigolc.madridshops.R
+import com.rodrigolc.madridshops.adapter.InfoWindowAdapter
 import com.rodrigolc.madridshops.domain.interactor.ErrorCompletion
 import com.rodrigolc.madridshops.domain.interactor.SuccessCompletion
 import com.rodrigolc.madridshops.domain.interactor.getAllShops.GetAllShoptivitiesInteractor
 import com.rodrigolc.madridshops.domain.interactor.getAllShopshops.GetAllShoptivitiesInteractorImplementation
 import com.rodrigolc.madridshops.domain.model.Shoptivities
+import com.rodrigolc.madridshops.domain.model.Shoptivity
 import com.rodrigolc.madridshops.fragment.ListFragment
 import com.rodrigolc.madridshops.router.Router
 import kotlinx.android.synthetic.main.activity_main.*
@@ -40,8 +42,9 @@ class MainActivity : AppCompatActivity() {
         Log.d("App", "onCreate MainActivity")
 
 
-        setupMap()
-        getShoptivitiesForType("activity")
+        //setupMap()
+        //getShoptivitiesForType("activity")
+        getShoptivitiesForType("shop")
         listFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment
     }
 
@@ -86,6 +89,7 @@ class MainActivity : AppCompatActivity() {
             showUserPosition(baseContext, it)
             map = it
             addAllPins(shoptivities)
+            it.setInfoWindowAdapter(InfoWindowAdapter(this))
 
         })
     }
@@ -130,13 +134,18 @@ class MainActivity : AppCompatActivity() {
     fun addAllPins(shoptivities: Shoptivities){
         for (i in 0 until shoptivities.count()){
             val shop = shoptivities.get(i)
-            addPin(map!!, shop.latitude!!, shop.longitude!!, shop.name)
+            if(shop.latitude != null && shop.longitude != null) {
+                addPin(map!!, shop)
+            }
 
         }
     }
 
-    fun addPin(map: GoogleMap, latitude: Double, longitude: Double, title: String){
-        map.addMarker(MarkerOptions().position(LatLng(latitude, longitude)).title(title))
+    fun addPin(map: GoogleMap, shoptivity: Shoptivity){
+        map.addMarker(MarkerOptions()
+                .position(LatLng(shoptivity.latitude!!, shoptivity.longitude!!))
+                .title(shoptivity.name))
+                .tag = shoptivity
     }
 
 
