@@ -4,6 +4,7 @@ package com.rodrigolc.madridshops.activity
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
@@ -20,7 +21,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.rodrigolc.madridshops.R
 import com.rodrigolc.madridshops.adapter.InfoWindowAdapter
-import com.rodrigolc.madridshops.adapter.RecyclerViewAdapter
 import com.rodrigolc.madridshops.domain.interactor.ErrorCompletion
 import com.rodrigolc.madridshops.domain.interactor.SuccessCompletion
 import com.rodrigolc.madridshops.domain.interactor.getAllShops.GetAllShoptivitiesInteractor
@@ -32,8 +32,17 @@ import com.rodrigolc.madridshops.router.Router
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity: AppCompatActivity() {
+    companion object {
+        private val EXTRA_TYPE = "EXTRA_TYPE"
+
+        fun intent(context: Context, type: String): Intent{
+            val intent = Intent(context, MainActivity::class.java)
+            intent.putExtra(EXTRA_TYPE, type)
+            return intent
+        }
+    }
+
     lateinit var listFragment: ListFragment
-    lateinit var adapter: RecyclerViewAdapter
 
     val getAllShopsInteractor: GetAllShoptivitiesInteractor = GetAllShoptivitiesInteractorImplementation(this)
 
@@ -42,18 +51,28 @@ class MainActivity: AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        Log.d("App", "onCreate MainActivity")
-
+        val type = intent.getSerializableExtra(EXTRA_TYPE) as String
 
         //setupMap()
-        getShoptivitiesForType("activity")
+        //getShoptivitiesForType(type)
         //getShoptivitiesForType("shop")
         listFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment
     }
 
-    private fun setUpList(){
-        //listFragment =
+    private fun setUpMapAndList(fetchType: String){
+        getAllShopsInteractor.executeForType(fetchType,
+                object : SuccessCompletion<Shoptivities> {
+                    override fun successCompletion(shoptivities: Shoptivities) {
+                        initializeMap(shoptivities)
+                    }
+                },
+                object : ErrorCompletion {
+                    override fun errorCompletion(errorMessage: String) {
+                        Toast.makeText(baseContext, "Error loading", Toast.LENGTH_LONG).show()
+                    }
+                })
     }
+
 
     private fun setupMap() {
         getAllShopsInteractor.execute(object : SuccessCompletion<Shoptivities> {
@@ -153,6 +172,16 @@ class MainActivity: AppCompatActivity() {
                 .tag = shoptivity
     }
 
+
+    private fun initializeList(shoptivities: Shoptivities){
+        if(fragmentManager.findFragmentById(R.id.activity_main_list_fragment) == null){
+            val fragment = ListFragment.newInstance()
+            fragmentManager.beginTransaction()
+                    //.add(, fragment)
+                    .commit()
+        }
+
+    }
 
 
 

@@ -11,11 +11,16 @@ import android.view.View
 import android.view.ViewGroup
 import com.rodrigolc.madridshops.R
 import com.rodrigolc.madridshops.adapter.RecyclerViewAdapter
+import com.rodrigolc.madridshops.domain.model.Shoptivities
 
 
 class ListFragment: Fragment() {
     companion object {
-        fun newInstance() = ListFragment()
+        fun newInstance(shoptivities: Shoptivities): ListFragment {
+            val fragment = ListFragment()
+            val arguments = Bundle()
+            //arguments.put
+        }
     }
 
     lateinit var root: View
