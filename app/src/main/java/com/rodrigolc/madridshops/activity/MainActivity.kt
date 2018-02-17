@@ -20,6 +20,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.rodrigolc.madridshops.R
 import com.rodrigolc.madridshops.adapter.InfoWindowAdapter
+import com.rodrigolc.madridshops.adapter.RecyclerViewAdapter
 import com.rodrigolc.madridshops.domain.interactor.ErrorCompletion
 import com.rodrigolc.madridshops.domain.interactor.SuccessCompletion
 import com.rodrigolc.madridshops.domain.interactor.getAllShops.GetAllShoptivitiesInteractor
@@ -30,8 +31,10 @@ import com.rodrigolc.madridshops.fragment.ListFragment
 import com.rodrigolc.madridshops.router.Router
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
-    var listFragment: ListFragment? = null
+class MainActivity: AppCompatActivity() {
+    lateinit var listFragment: ListFragment
+    lateinit var adapter: RecyclerViewAdapter
+
     val getAllShopsInteractor: GetAllShoptivitiesInteractor = GetAllShoptivitiesInteractorImplementation(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +49,10 @@ class MainActivity : AppCompatActivity() {
         getShoptivitiesForType("activity")
         //getShoptivitiesForType("shop")
         listFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment
+    }
+
+    private fun setUpList(){
+        //listFragment =
     }
 
     private fun setupMap() {
@@ -75,8 +82,6 @@ class MainActivity : AppCompatActivity() {
                 }
             })
     }
-
-
 
     private fun initializeMap(shoptivities: Shoptivities) {
         val mapFragment = supportFragmentManager.findFragmentById(R.id.activity_main_map_fragment) as SupportMapFragment
