@@ -9,6 +9,7 @@
 
     <FrameLayout
         android:id="@+id/shoptivity_detail_fragment"
+        android:name="com.rodrigolc.madridshops.fragment.DetailFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
