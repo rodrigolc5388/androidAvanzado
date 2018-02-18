@@ -31,7 +31,8 @@ import com.rodrigolc.madridshops.fragment.ListFragment
 import com.rodrigolc.madridshops.router.Router
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity: AppCompatActivity() {
+class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListener {
+
     companion object {
         private val EXTRA_TYPE = "EXTRA_TYPE"
 
@@ -51,19 +52,21 @@ class MainActivity: AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        val type = intent.getSerializableExtra(EXTRA_TYPE) as String
+        //val type = intent.getSerializableExtra(EXTRA_TYPE) as String
 
         //setupMap()
         //getShoptivitiesForType(type)
         //getShoptivitiesForType("shop")
+        setUpMapAndListForType("activity")
         listFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment
     }
 
-    private fun setUpMapAndList(fetchType: String){
+    private fun setUpMapAndListForType(fetchType: String){
         getAllShopsInteractor.executeForType(fetchType,
                 object : SuccessCompletion<Shoptivities> {
                     override fun successCompletion(shoptivities: Shoptivities) {
                         initializeMap(shoptivities)
+                        initializeList(shoptivities)
                     }
                 },
                 object : ErrorCompletion {
@@ -88,7 +91,7 @@ class MainActivity: AppCompatActivity() {
         })
     }
 
-    private fun getShoptivitiesForType(type: String) {
+    /*private fun getShoptivitiesForType(type: String) {
         getAllShopsInteractor.executeForType(type,
             object : SuccessCompletion<Shoptivities> {
                 override fun successCompletion(shoptivities: Shoptivities) {
@@ -100,7 +103,7 @@ class MainActivity: AppCompatActivity() {
                     Toast.makeText(baseContext, "Error loading", Toast.LENGTH_LONG).show()
                 }
             })
-    }
+    }*/
 
     private fun initializeMap(shoptivities: Shoptivities) {
         val mapFragment = supportFragmentManager.findFragmentById(R.id.activity_main_map_fragment) as SupportMapFragment
@@ -174,16 +177,14 @@ class MainActivity: AppCompatActivity() {
 
 
     private fun initializeList(shoptivities: Shoptivities){
-        if(fragmentManager.findFragmentById(R.id.activity_main_list_fragment) == null){
-            val fragment = ListFragment.newInstance()
-            fragmentManager.beginTransaction()
-                    //.add(, fragment)
-                    .commit()
-        }
-
+        listFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment
+        listFragment.setShoptivities(shoptivities)
     }
 
 
+    override fun onSelectedShoptivity(shoptivity: Shoptivity) {
+        // PENDIENTE IMPLEMENTAR
+    }
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

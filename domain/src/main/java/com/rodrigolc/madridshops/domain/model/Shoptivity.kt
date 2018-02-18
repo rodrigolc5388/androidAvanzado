@@ -1,5 +1,7 @@
 package com.rodrigolc.madridshops.domain.model
 
+import java.io.Serializable
+
 /**
  * Shoptivity: represents one Shoptivity
  */
@@ -14,14 +16,14 @@ data class Shoptivity(
         val longitude: Double?,
         val latitude: Double?,
         val type: String
-        ) {
+        ): Serializable {
     init {
         Shoptivities(ArrayList<Shoptivity>())
     }
 }
 
 
-class Shoptivities(val shoptivities: MutableList<Shoptivity>): Aggregate<Shoptivity> {
+class Shoptivities(val shoptivities: MutableList<Shoptivity>): Aggregate<Shoptivity>, Serializable {
     override fun count(): Int = shoptivities.size
 
     override fun all(): List<Shoptivity> = shoptivities
