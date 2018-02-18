@@ -13,8 +13,8 @@ class DetailActivity: AppCompatActivity() {
     companion object {
         private val EXTRA_SHOPTIVITY = "EXTRA_SHOPTIVITY"
 
-        fun newInstance(context: Context, shoptivity: Shoptivity): Intent{
-            val intent = Intent(context, DetailActivity:: class.java)
+        fun newInstance(context: Context, shoptivity: Shoptivity): Intent {
+            val intent = Intent(context, DetailActivity::class.java)
             intent.putExtra(EXTRA_SHOPTIVITY, shoptivity)
 
             return intent
@@ -29,11 +29,12 @@ class DetailActivity: AppCompatActivity() {
         supportActionBar?.title = shoptivity.name.capitalize()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        if (fragmentManager.findFragmentById(R.id.shoptivity_detail_fragment) == null){
+        if (fragmentManager.findFragmentById(R.id.shoptivity_detail_fragment) == null) {
             val fragment = DetailFragment.newInstance(shoptivity)
             fragmentManager.beginTransaction()
                     .add(R.id.shoptivity_detail_fragment, fragment)
                     .commit()
         }
 
+    }
 }
