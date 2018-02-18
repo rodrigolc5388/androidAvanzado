@@ -56,7 +56,6 @@ class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListen
 
         //setupMap()
         //getShoptivitiesForType(type)
-        //getShoptivitiesForType("shop")
         setUpMapAndListForType("activity")
         listFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment
     }

@@ -35,6 +35,5 @@ class DetailActivity: AppCompatActivity() {
                     .add(R.id.shoptivity_detail_fragment, fragment)
                     .commit()
         }
-    }
 
 }
