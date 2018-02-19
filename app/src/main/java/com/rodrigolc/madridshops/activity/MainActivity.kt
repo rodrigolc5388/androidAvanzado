@@ -182,7 +182,6 @@ class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListen
 
 
     override fun onSelectedShoptivity(shoptivity: Shoptivity) {
-        Log.d("CORIO", "Paso detailShoptivity para detalle: " + shoptivity.name)
         Router().navigateFromMainActivityToDetailActivity(this, shoptivity)
     }
 
