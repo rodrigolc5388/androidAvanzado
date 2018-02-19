@@ -1,13 +1,20 @@
 package com.rodrigolc.madridshops.activity
 
+import android.app.Fragment
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import android.widget.Toast
 import com.rodrigolc.madridshops.R
+import com.rodrigolc.madridshops.domain.interactor.ErrorCompletion
+import com.rodrigolc.madridshops.domain.interactor.SuccessCompletion
 import com.rodrigolc.madridshops.domain.interactor.getAllShops.GetAllShoptivitiesInteractor
 import com.rodrigolc.madridshops.domain.interactor.getAllShopshops.GetAllShoptivitiesInteractorImplementation
+import com.rodrigolc.madridshops.domain.model.Shoptivities
 import com.rodrigolc.madridshops.fragment.HomeFragment
+import com.rodrigolc.madridshops.router.Router
 
-class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener{
+class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener {
 
     val getAllShopsInteractor: GetAllShoptivitiesInteractor = GetAllShoptivitiesInteractorImplementation(this)
 
@@ -16,21 +23,28 @@ class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener{
         setContentView(R.layout.activity_home)
         //setSupportActionBar(toolbar)
 
-        
+        dataBaseTrigger()
+
+        if (fragmentManager.findFragmentById(R.id.home_fragment) == null) {
+            val fragment: Fragment = HomeFragment.newInstance()
+            fragmentManager.beginTransaction()
+                    .add(R.id.home_fragment, fragment)
+                    .commit()
+        }
     }
 
-
-
-
-
-
-
-
-
-
-
-    override fun onSelectedSection(section: String) {
-
+    private fun dataBaseTrigger() {
+        getAllShopsInteractor.execute(object : SuccessCompletion<Shoptivities> {
+            override fun successCompletion(shoptivities: Shoptivities) {
+                Log.d("MadridShops Data", "Data base loaded succesfully")
+            }
+        }, object : ErrorCompletion {
+            override fun errorCompletion(errorMessage: String) {
+                Toast.makeText(baseContext, "Error loading data", Toast.LENGTH_LONG).show()
+            }
+        })
     }
+
+    override fun onSelectedSection(section: String) = Router().navigateFromHomeActivityToMainActivity(this, section)
 
 }
