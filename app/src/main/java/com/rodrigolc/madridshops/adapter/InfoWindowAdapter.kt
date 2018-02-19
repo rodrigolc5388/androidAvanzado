@@ -26,16 +26,16 @@ class InfoWindowAdapter(val context: Context): GoogleMap.InfoWindowAdapter{
                 .load(shoptivity.logo)
                 .into(image, InfoWindowAdapterCallback(context, shoptivity.logo, image, m))
 
-        /*if(shoptivity.type == "shop"){
-            infoWinView.info_window_title.text = shoptivity.name
-            infoWinView.info_window_subtitle.text = shoptivity.openingHours
+        /*if(detailShoptivity.type == "shop"){
+            infoWinView.info_window_title.text = detailShoptivity.name
+            infoWinView.info_window_subtitle.text = detailShoptivity.openingHours
 
-            Picasso.with(context).load(shoptivity.image).into(image)
+            Picasso.with(context).load(detailShoptivity.image).into(image)
 
-        } else if (shoptivity.type == "activity"){
-            infoWinView.info_window_title.text = shoptivity.name
-            infoWinView.info_window_subtitle.text = shoptivity.openingHours
-            Picasso.with(context).load(shoptivity.image).into(image)
+        } else if (detailShoptivity.type == "activity"){
+            infoWinView.info_window_title.text = detailShoptivity.name
+            infoWinView.info_window_subtitle.text = detailShoptivity.openingHours
+            Picasso.with(context).load(detailShoptivity.image).into(image)
         }*/
 
 

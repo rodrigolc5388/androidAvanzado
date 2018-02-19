@@ -41,12 +41,6 @@ class ListFragment: Fragment() {
         return root
     }
 
-        /*adapter.onClickListener = View.OnClickListener { v: View ->
-            val position = shoptivitiesList.getChildAdapterPosition(v)
-            val shoptivity = shoptivities.get(position)
-            onSelectedShoptivityListener?.onSelectedShoptivity(shoptivity)
-            activity.finish() }*/
-
 
 
     fun setAdapterListener(adapter: RecyclerViewAdapter){

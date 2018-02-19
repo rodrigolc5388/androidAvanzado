@@ -1,19 +1,17 @@
 package com.rodrigolc.madridshops.fragment
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-
 import com.rodrigolc.madridshops.R
 import com.rodrigolc.madridshops.domain.model.Shoptivity
 import com.squareup.picasso.Picasso
 
 
-class DetailFragment : Fragment() {
+class DetailFragment : android.app.Fragment() {
 
     companion object {
         private val EXTRA_SHOPTIVITY_FRAGMENT = "EXTRA_SHOPTIVITY_FRAGMENT"
@@ -34,7 +32,7 @@ class DetailFragment : Fragment() {
     lateinit var openingHours: TextView
     lateinit var address: TextView
     lateinit var map: ImageView
-    lateinit var shoptivity: Shoptivity
+    lateinit var detailShoptivity: Shoptivity
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -42,24 +40,24 @@ class DetailFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
 
         inflater?.let{
-            shoptivity = arguments.getSerializable(EXTRA_SHOPTIVITY_FRAGMENT) as Shoptivity
+            detailShoptivity = arguments.getSerializable(EXTRA_SHOPTIVITY_FRAGMENT) as Shoptivity
 
             root = it.inflate(R.layout.fragment_detail, container, false)
 
             picture = root.findViewById(R.id.fragment_detail_image_view)
-            Picasso.with(activity).load(shoptivity.image).into(picture)
+            Picasso.with(activity).load(detailShoptivity.image).into(picture)
 
             description = root.findViewById(R.id.fragment_detail_description)
-            description.setText(shoptivity.description)
+            description.setText(detailShoptivity.description)
 
             openingHours = root.findViewById(R.id.fragment_detail_opening_hours)
-            openingHours.setText(shoptivity.openingHours)
+            openingHours.setText(detailShoptivity.openingHours)
 
             address = root.findViewById(R.id.fragment_detail_address)
-            address.setText(shoptivity.address)
+            address.setText(detailShoptivity.address)
 
             map = root.findViewById(R.id.fragment_detail_map_image)
-            val url = "http://maps.googleapis.com/maps/api/staticmap?center=${shoptivity.latitude},${shoptivity.longitude}&zoom=17&size=${map.width}x${map.height}&scale=2"
+            val url = "http://maps.googleapis.com/maps/api/staticmap?center=${detailShoptivity.latitude},${detailShoptivity.longitude}&zoom=17&size=${map.width}x${map.height}&scale=2&key=AIzaSyCuHHCDuQUYslST0sRTRDAavFZw3qWR_AY"
             Picasso.with(activity).load(url).into(map)
         }
 

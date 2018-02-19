@@ -182,8 +182,8 @@ class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListen
 
 
     override fun onSelectedShoptivity(shoptivity: Shoptivity) {
-        // PENDIENTE IMPLEMENTAR
-        Log.d("CORIO", "Paso shoptivity para detalle: " + shoptivity.name)
+        Log.d("CORIO", "Paso detailShoptivity para detalle: " + shoptivity.name)
+        Router().navigateFromMainActivityToDetailActivity(this, shoptivity)
     }
 
 
