@@ -23,16 +23,11 @@ class DetailActivity: AppCompatActivity() {
         }
     }
 
-    //lateinit var detailFragment: DetailFragment
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        //detailFragment = supportFragmentManager.findFragmentById(R.id.shoptivity_detail_fragment) as DetailFragment
-
         val shoptivity = intent.getSerializableExtra(EXTRA_SHOPTIVITY) as Shoptivity
-        //passShoptivity(shoptivity)
 
         supportActionBar?.title = shoptivity.name.capitalize()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -44,7 +39,6 @@ class DetailActivity: AppCompatActivity() {
                     .add(R.id.shoptivity_detail_fragment, fragment)
                     .commit()
         }
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -54,11 +48,5 @@ class DetailActivity: AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
-    /*private fun passShoptivity(shoptivity: Shoptivity){
-        //detailFragment = supportFragmentManager.findFragmentById(R.id.shoptivity_detail_fragment) as DetailFragment
-        detailFragment.setShoptivity(shoptivity)
-    }*/
-
 }
 

@@ -1,6 +1,7 @@
 package com.rodrigolc.madridshops.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +42,8 @@ class DetailFragment : android.app.Fragment() {
 
         inflater?.let{
             detailShoptivity = arguments.getSerializable(EXTRA_SHOPTIVITY_FRAGMENT) as Shoptivity
+            Log.d("CORIO", "Latitude: " + detailShoptivity.latitude.toString())
+            Log.d("CORIO", "Latitude: " + detailShoptivity.longitude.toString())
 
             root = it.inflate(R.layout.fragment_detail, container, false)
 
@@ -57,8 +60,10 @@ class DetailFragment : android.app.Fragment() {
             address.setText(detailShoptivity.address)
 
             map = root.findViewById(R.id.fragment_detail_map_image)
-            val url = "http://maps.googleapis.com/maps/api/staticmap?center=${detailShoptivity.latitude},${detailShoptivity.longitude}&zoom=17&size=${map.width}x${map.height}&scale=2&key=AIzaSyCuHHCDuQUYslST0sRTRDAavFZw3qWR_AY"
-            Picasso.with(activity).load(url).into(map)
+            val url = "http://maps.googleapis.com/maps/api/staticmap?center=${detailShoptivity.latitude.toString()},${detailShoptivity.longitude.toString()}&zoom=17&size=320x220&scale=2&key=AIzaSyCuHHCDuQUYslST0sRTRDAavFZw3qWR_AY"
+            val url2 = "http://maps.googleapis.com/maps/api/staticmap?center=40.4353,%20-3.6924&zoom=17&size=320x220&scale=2"
+            val url3 = "http://maps.googleapis.com/maps/api/staticmap?center=${detailShoptivity.latitude.toString()},${detailShoptivity.longitude.toString()}&zoom=17&size=320x220&scale=2"
+            Picasso.with(activity).load(url3).into(map)
         }
 
         return root
