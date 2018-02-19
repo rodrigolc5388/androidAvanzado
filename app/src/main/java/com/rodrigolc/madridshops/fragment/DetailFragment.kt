@@ -40,9 +40,9 @@ class DetailFragment : android.app.Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
 
         inflater?.let{
-            detailShoptivity = arguments.getSerializable(EXTRA_SHOPTIVITY_FRAGMENT) as Shoptivity
-
             root = it.inflate(R.layout.fragment_detail, container, false)
+
+            detailShoptivity = arguments.getSerializable(EXTRA_SHOPTIVITY_FRAGMENT) as Shoptivity
 
             picture = root.findViewById(R.id.fragment_detail_image_view)
             Picasso.with(activity).load(detailShoptivity.image).into(picture)
