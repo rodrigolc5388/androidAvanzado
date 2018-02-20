@@ -37,6 +37,7 @@ class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener 
         getAllShoptivitiesInteractor.execute(object : SuccessCompletion<Shoptivities> {
             override fun successCompletion(shoptivities: Shoptivities) {
                 Log.d("MadridShops Data", "Data base loaded succesfully")
+                Log.d("CORIO HomeActivity", "" + shoptivities.count())
             }
         }, object : ErrorCompletion {
             override fun errorCompletion(errorMessage: String) {

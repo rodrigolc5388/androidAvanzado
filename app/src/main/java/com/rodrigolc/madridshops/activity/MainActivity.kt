@@ -32,8 +32,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListener {
 
-
-
     companion object {
         private val EXTRA_TYPE = "EXTRA_TYPE"
 
@@ -65,6 +63,7 @@ class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListen
                     override fun successCompletion(shoptivities: Shoptivities) {
                         initializeMap(shoptivities)
                         initializeList(shoptivities)
+                        Log.d("CORIO MainShoptivities", "" + shoptivities.count())
                     }
                 },
                 object : ErrorCompletion {
