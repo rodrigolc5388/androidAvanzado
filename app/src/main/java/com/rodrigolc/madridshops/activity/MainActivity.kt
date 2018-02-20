@@ -42,24 +42,23 @@ class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListen
         }
     }
 
+    private var map: GoogleMap? = null
     lateinit var listFragment: ListFragment
-
-    val getAllShopsInteractor: GetAllShoptivitiesInteractor = GetAllShoptivitiesInteractorImplementation(this)
+    val getAllShoptivitiesInteractor: GetAllShoptivitiesInteractor = GetAllShoptivitiesInteractorImplementation(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val type = intent.getSerializableExtra(EXTRA_TYPE) as String
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setUpMapAndListForType(type)
-        listFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment
+
     }
 
     private fun setUpMapAndListForType(fetchType: String){
-        getAllShopsInteractor.executeForType(fetchType,
+        getAllShoptivitiesInteractor.executeForType(fetchType,
                 object : SuccessCompletion<Shoptivities> {
                     override fun successCompletion(shoptivities: Shoptivities) {
                         initializeMap(shoptivities)
@@ -72,35 +71,6 @@ class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListen
                     }
                 })
     }
-
-
-    private fun setupMap() {
-        getAllShopsInteractor.execute(object : SuccessCompletion<Shoptivities> {
-            override fun successCompletion(shoptivities: Shoptivities) {
-                //initializeMap(shoptivities)
-                //Log.d("Shoptivities", "Count: " + shoptivities.count())
-
-            }
-        }, object : ErrorCompletion {
-            override fun errorCompletion(errorMessage: String) {
-                Toast.makeText(baseContext, "Error loading", Toast.LENGTH_LONG).show()
-            }
-        })
-    }
-
-    /*private fun getShoptivitiesForType(type: String) {
-        getAllShopsInteractor.executeForType(type,
-            object : SuccessCompletion<Shoptivities> {
-                override fun successCompletion(shoptivities: Shoptivities) {
-                    initializeMap(shoptivities)
-                }
-            },
-            object : ErrorCompletion {
-                override fun errorCompletion(errorMessage: String) {
-                    Toast.makeText(baseContext, "Error loading", Toast.LENGTH_LONG).show()
-                }
-            })
-    }*/
 
     private fun initializeMap(shoptivities: Shoptivities) {
         val mapFragment = supportFragmentManager.findFragmentById(R.id.activity_main_map_fragment) as SupportMapFragment
@@ -123,7 +93,7 @@ class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListen
 
         val cameraPosition = CameraPosition.Builder()
                 .target(coordinate)
-                .zoom(15f)
+                .zoom(13f)
                 .build()
 
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
@@ -142,8 +112,6 @@ class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListen
         }
 
     }
-
-    private var map: GoogleMap? = null
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -179,22 +147,9 @@ class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListen
     }
 
 
-    override fun onSelectedShoptivity(shoptivity: Shoptivity) {
-        Router().navigateFromMainActivityToDetailActivity(this, shoptivity)
-    }
+    override fun onSelectedShoptivity(shoptivity: Shoptivity) = Router().navigateFromMainActivityToDetailActivity(this, shoptivity)
 
 
-    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
-        Router().navigateFromMainActivityToPicassoActivity(this)
-        return true /*when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }*/
-    }*/
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {

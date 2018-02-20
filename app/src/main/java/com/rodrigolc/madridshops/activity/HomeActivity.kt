@@ -16,7 +16,7 @@ import com.rodrigolc.madridshops.router.Router
 
 class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener {
 
-    val getAllShopsInteractor: GetAllShoptivitiesInteractor = GetAllShoptivitiesInteractorImplementation(this)
+    val getAllShoptivitiesInteractor: GetAllShoptivitiesInteractor = GetAllShoptivitiesInteractorImplementation(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +34,7 @@ class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener 
     }
 
     private fun dataBaseTrigger() {
-        getAllShopsInteractor.execute(object : SuccessCompletion<Shoptivities> {
+        getAllShoptivitiesInteractor.execute(object : SuccessCompletion<Shoptivities> {
             override fun successCompletion(shoptivities: Shoptivities) {
                 Log.d("MadridShops Data", "Data base loaded succesfully")
             }
@@ -45,6 +45,6 @@ class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener 
         })
     }
 
-    override fun onSelectedSection(section: String) = Router().navigateFromHomeActivityToMainActivity(this, section)
 
+    override fun onSelectedSection(section: String) = Router().navigateFromHomeActivityToMainActivity(this, section)
 }
