@@ -11,10 +11,11 @@ import java.lang.ref.WeakReference
 
 internal class CacheImpl(context: Context): Cache {
     val context = WeakReference<Context>(context)
+    val ddbb = cacheDBHelper()
 
     override fun getAllShoptivities(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
         Thread(Runnable {
-            var shoptivities = ShoptivityDAO(cacheDBHelper()).query()
+            var shoptivities = ShoptivityDAO(ddbb).query()
             DispatchOnMainThreadRun(Runnable {
                 if (shoptivities.count() > 0) {
                     success(shoptivities)
@@ -27,7 +28,7 @@ internal class CacheImpl(context: Context): Cache {
 
     override fun getAllShoptivitiesForType(type: String, success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
         Thread(Runnable {
-            var shoptivities = ShoptivityDAO(cacheDBHelper()).queryType(type)
+            var shoptivities = ShoptivityDAO(ddbb).queryType(type)
             DispatchOnMainThreadRun(Runnable {
                 if (shoptivities.count() > 0) {
                     success(shoptivities)
@@ -41,7 +42,7 @@ internal class CacheImpl(context: Context): Cache {
     override fun saveAllShoptivities(type: String, shoptivities: List<ShoptivityEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit) {
         Thread(Runnable {
             try {
-                shoptivities.forEach { ShoptivityDAO(cacheDBHelper()).insert(type, it) }
+                shoptivities.forEach { ShoptivityDAO(ddbb).insert(type, it) }
 
                 DispatchOnMainThreadRun(Runnable {
                     success()
@@ -59,7 +60,7 @@ internal class CacheImpl(context: Context): Cache {
 
     override fun deleteAllShoptivities(success: () -> Unit, error: (errorMessage: String) -> Unit) {
         Thread(Runnable {
-            var successDeleting = ShoptivityDAO(cacheDBHelper()).deleteAll()
+            var successDeleting = ShoptivityDAO(ddbb).deleteAll()
             DispatchOnMainThreadRun(Runnable {
                 if (successDeleting) {
                     success()

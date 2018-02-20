@@ -32,6 +32,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListener {
 
+
+
     companion object {
         private val EXTRA_TYPE = "EXTRA_TYPE"
 
@@ -84,6 +86,11 @@ class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListen
             map = it
             addAllPins(shoptivities)
             it.setInfoWindowAdapter(InfoWindowAdapter(this))
+            it.setOnInfoWindowClickListener(GoogleMap.OnInfoWindowClickListener {
+                val shoptivity: Shoptivity = it.tag as Shoptivity
+                Router().navigateFromMainActivityToDetailActivity(this, shoptivity)
+
+            })
 
         })
     }
