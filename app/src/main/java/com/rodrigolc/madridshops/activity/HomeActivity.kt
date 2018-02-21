@@ -14,6 +14,8 @@ import com.rodrigolc.madridshops.domain.model.Shoptivities
 import com.rodrigolc.madridshops.fragment.HomeFragment
 import com.rodrigolc.madridshops.router.Router
 
+
+
 class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener {
 
     val getAllShoptivitiesInteractor: GetAllShoptivitiesInteractor = GetAllShoptivitiesInteractorImplementation(this)
@@ -48,4 +50,7 @@ class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener 
 
 
     override fun onSelectedSection(section: String) = Router().navigateFromHomeActivityToMainActivity(this, section)
+
+
+
 }
