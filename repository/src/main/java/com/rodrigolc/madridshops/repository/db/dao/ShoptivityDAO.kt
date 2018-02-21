@@ -3,7 +3,6 @@ package com.rodrigolc.madridshops.repository.db.dao
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.util.Log
 import com.rodrigolc.madridshops.repository.db.DBConstants
 import com.rodrigolc.madridshops.repository.db.DBHelper
 import com.rodrigolc.madridshops.repository.model.ShoptivityEntity
@@ -84,7 +83,6 @@ internal class ShoptivityDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityE
 
         while (cursor.moveToNext()){
             val se = entityFromCursor(cursor)
-            Log.d("CORIO DAO", "" + se?.name)
             queryResult.add(se!!)
         }
 

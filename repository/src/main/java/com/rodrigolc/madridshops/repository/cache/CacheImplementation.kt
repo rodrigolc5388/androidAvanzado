@@ -18,8 +18,10 @@ internal class CacheImpl(context: Context): Cache {
             var shoptivities = ShoptivityDAO(ddbb).query()
             DispatchOnMainThreadRun(Runnable {
                 if (shoptivities.count() > 0) {
+                    ddbb.close()
                     success(shoptivities)
                 } else {
+                    ddbb.close()
                     error("No shoptivities")
                 }
             })
@@ -31,8 +33,10 @@ internal class CacheImpl(context: Context): Cache {
             var shoptivities = ShoptivityDAO(ddbb).queryType(type)
             DispatchOnMainThreadRun(Runnable {
                 if (shoptivities.count() > 0) {
+                    ddbb.close()
                     success(shoptivities)
                 } else {
+                    ddbb.close()
                     error("No shoptivities")
                 }
             })
@@ -45,10 +49,12 @@ internal class CacheImpl(context: Context): Cache {
                 shoptivities.forEach { ShoptivityDAO(ddbb).insert(type, it) }
 
                 DispatchOnMainThreadRun(Runnable {
+                    ddbb.close()
                     success()
                 })
             } catch(e: Exception) {
                 DispatchOnMainThreadRun(Runnable {
+                    ddbb.close()
                         error("Error saving/inserting shoptivities")
                 })
             }
@@ -63,8 +69,10 @@ internal class CacheImpl(context: Context): Cache {
             var successDeleting = ShoptivityDAO(ddbb).deleteAll()
             DispatchOnMainThreadRun(Runnable {
                 if (successDeleting) {
+                    ddbb.close()
                     success()
                 } else {
+                    ddbb.close()
                     error("Error deleting")
                 }
             })
