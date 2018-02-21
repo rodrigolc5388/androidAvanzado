@@ -50,6 +50,7 @@ class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener 
         })
     }
 
+
     private fun checkInternetConnection(){
         InternetStatusInteractorImpl().execute(this, success = {
             dataBaseTrigger()
@@ -59,14 +60,12 @@ class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener 
                     .setMessage("There is no internet connection. Please solve the issue and try again.")
                     .setPositiveButton("Ok", {dialog, _ ->
                         dialog.dismiss()
-                        //dataBaseTrigger()
                         this.finish()
-
                     })
-                    /*.setNegativeButton("Retry",{ dialog, _ ->
+                    .setNegativeButton("Use cached data",{ dialog, _ ->
                         dialog.dismiss()
-                        checkInternetConnection()
-                    })*/
+                        dataBaseTrigger()
+                    })
                     .show()
 
         })

@@ -113,11 +113,12 @@ class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListen
             ActivityCompat.requestPermissions(this,
                     arrayOf(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION),
                     10)
-
             return
+        } else {
+            map.isMyLocationEnabled = true
         }
-
     }
+
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
