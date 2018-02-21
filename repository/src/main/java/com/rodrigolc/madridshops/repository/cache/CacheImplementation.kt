@@ -62,8 +62,7 @@ internal class CacheImpl(context: Context): Cache {
         }).run()
     }
 
-
-
+    
     override fun deleteAllShoptivities(success: () -> Unit, error: (errorMessage: String) -> Unit) {
         Thread(Runnable {
             var successDeleting = ShoptivityDAO(ddbb).deleteAll()
