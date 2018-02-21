@@ -25,7 +25,6 @@ class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        //setSupportActionBar(toolbar)
 
         checkInternetConnection()
 
@@ -50,7 +49,6 @@ class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener 
         })
     }
 
-
     private fun checkInternetConnection(){
         InternetStatusInteractorImpl().execute(this, success = {
             dataBaseTrigger()
@@ -71,10 +69,6 @@ class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener 
         })
     }
 
-
-
+    // Fragment listener method to receive section's button touched
     override fun onSelectedSection(section: String) = Router().navigateFromHomeActivityToMainActivity(this, section)
-
-
-
 }
