@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
-import com.rodrigolc.madridshops.R
 import com.rodrigolc.madridshops.domain.interactor.ErrorCompletion
 import com.rodrigolc.madridshops.domain.interactor.SuccessCompletion
 import com.rodrigolc.madridshops.domain.interactor.getAllShops.GetAllShoptivitiesInteractor
@@ -15,7 +14,7 @@ import com.rodrigolc.madridshops.domain.interactor.internetstatus.InternetStatus
 import com.rodrigolc.madridshops.domain.model.Shoptivities
 import com.rodrigolc.madridshops.fragment.HomeFragment
 import com.rodrigolc.madridshops.router.Router
-
+import kotlinx.android.synthetic.main.activity_home.*
 
 
 class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener {
@@ -24,36 +23,43 @@ class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(com.rodrigolc.madridshops.R.layout.activity_home)
 
         checkInternetConnection()
 
-        if (fragmentManager.findFragmentById(R.id.home_fragment) == null) {
+        if (fragmentManager.findFragmentById(com.rodrigolc.madridshops.R.id.home_fragment) == null) {
             val fragment: Fragment = HomeFragment.newInstance()
             fragmentManager.beginTransaction()
-                    .add(R.id.home_fragment, fragment)
+                    .add(com.rodrigolc.madridshops.R.id.home_fragment, fragment)
                     .commit()
         }
     }
 
     private fun dataBaseTrigger() {
+
         getAllShoptivitiesInteractor.execute(object : SuccessCompletion<Shoptivities> {
             override fun successCompletion(shoptivities: Shoptivities) {
+                //loadingView.smoothToHide()
                 Log.d("MadridShops Data", "Data base loaded succesfully")
                 Log.d("CORIO HomeActivity", "" + shoptivities.count())
             }
         }, object : ErrorCompletion {
             override fun errorCompletion(errorMessage: String) {
+                //loadingView.smoothToHide()
                 Toast.makeText(baseContext, "Error loading data", Toast.LENGTH_LONG).show()
             }
         })
     }
 
     private fun checkInternetConnection(){
+        loadingView.smoothToShow()
         InternetStatusInteractorImpl().execute(this, success = {
             dataBaseTrigger()
+            loadingView.smoothToHide()
         }, error = {
+            loadingView.smoothToHide()
             AlertDialog.Builder(this)
+
                     .setTitle("No internet connection")
                     .setMessage("There is no internet connection. Please solve the issue and try again.")
                     .setPositiveButton("Ok", {dialog, _ ->

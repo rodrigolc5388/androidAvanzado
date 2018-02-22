@@ -8,6 +8,15 @@
     tools:context=".activity.HomeActivity"
     android:orientation="vertical">
 
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/loadingView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/AVLoadingIndicatorView.Small"
+        app:indicatorName="BallPulseIndicator"
+        app:indicatorColor="@color/colorAccent"
+        />
+
     <FrameLayout
         android:id="@+id/home_fragment"
         android:layout_width="match_parent"
