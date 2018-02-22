@@ -7,6 +7,6 @@ import com.rodrigolc.madridshops.utils.SectionType
 internal interface Cache {
     fun getAllShoptivities(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit)
     fun getAllShoptivitiesForType(type: SectionType, success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit)
-    fun saveAllShoptivities(type: String, shoptivities: List<ShoptivityEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit)
+    fun saveAllShoptivities(type: SectionType, shoptivities: List<ShoptivityEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit)
     fun deleteAllShoptivities(success: () -> Unit, error: (errorMessage: String) -> Unit)
 }

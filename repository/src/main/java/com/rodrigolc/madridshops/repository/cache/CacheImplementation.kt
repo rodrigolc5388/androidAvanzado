@@ -44,7 +44,7 @@ internal class CacheImpl(context: Context): Cache {
         }).run()
     }
 
-    override fun saveAllShoptivities(type: String, shoptivities: List<ShoptivityEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit) {
+    override fun saveAllShoptivities(type: SectionType, shoptivities: List<ShoptivityEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit) {
         Thread(Runnable {
             try {
                 shoptivities.forEach { ShoptivityDAO(ddbb).insert(type, it) }

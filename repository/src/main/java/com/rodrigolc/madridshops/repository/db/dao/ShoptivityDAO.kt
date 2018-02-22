@@ -13,10 +13,10 @@ internal class ShoptivityDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityE
     private val dbReadOnlyConnection: SQLiteDatabase = dbHelper.readableDatabase
     private val dbReadWriteConnection: SQLiteDatabase = dbHelper.writableDatabase
 
-    override fun insert(type: String, element: ShoptivityEntity): Long {
+    override fun insert(type: SectionType, element: ShoptivityEntity): Long {
         var id: Long = 0
 
-        id = dbReadWriteConnection.insert(DBConstants.TABLE_SHOPTIVITIES, null, contentValues(type, element))
+        id = dbReadWriteConnection.insert(DBConstants.TABLE_SHOPTIVITIES, null, contentValues(type.type, element))
         return id
     }
 
