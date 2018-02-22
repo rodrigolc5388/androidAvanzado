@@ -10,6 +10,7 @@ import com.rodrigolc.madridshops.domain.model.Shoptivity
 import com.rodrigolc.madridshops.repository.Repository
 import com.rodrigolc.madridshops.repository.RepositoryImpl
 import com.rodrigolc.madridshops.repository.model.ShoptivityEntity
+import com.rodrigolc.madridshops.utils.SectionType
 import java.lang.ref.WeakReference
 
 class GetAllShoptivitiesInteractorImplementation(context: Context): GetAllShoptivitiesInteractor {
@@ -27,7 +28,7 @@ class GetAllShoptivitiesInteractorImplementation(context: Context): GetAllShopti
         })
     }
 
-    override fun executeForType(type: String, success: SuccessCompletion<Shoptivities>, error: ErrorCompletion) {
+    override fun executeForType(type: SectionType, success: SuccessCompletion<Shoptivities>, error: ErrorCompletion) {
         repository.getAllShoptivitiesForType(type, success = {
             val shoptivitiesList: Shoptivities = entityMapper(it)
             success.successCompletion(shoptivitiesList)

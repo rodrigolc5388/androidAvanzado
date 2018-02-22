@@ -1,11 +1,12 @@
 package com.rodrigolc.madridshops.repository.db.dao
 
 import android.database.Cursor
+import com.rodrigolc.madridshops.utils.SectionType
 
 interface DAOReadOperations<T>{
     fun query(id: Long): T
     fun query(): List<T>
-    fun queryType(type: String): List<T>
+    fun queryType(type: SectionType): List<T>
     fun queryCursor(id: Long ): Cursor
 }
 

@@ -28,6 +28,7 @@ import com.rodrigolc.madridshops.domain.model.Shoptivities
 import com.rodrigolc.madridshops.domain.model.Shoptivity
 import com.rodrigolc.madridshops.fragment.ListFragment
 import com.rodrigolc.madridshops.router.Router
+import com.rodrigolc.madridshops.utils.SectionType
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListener {
@@ -35,7 +36,7 @@ class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListen
     companion object {
         private val EXTRA_TYPE = "EXTRA_TYPE"
 
-        fun intent(context: Context, type: String): Intent{
+        fun intent(context: Context, type: SectionType): Intent{
             val intent = Intent(context, MainActivity::class.java)
             intent.putExtra(EXTRA_TYPE, type)
             return intent
@@ -52,12 +53,12 @@ class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListen
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val type = intent.getSerializableExtra(EXTRA_TYPE) as String
+        val type = intent.getSerializableExtra(EXTRA_TYPE) as SectionType
         setUpMapAndListForType(type)
 
     }
 
-    private fun setUpMapAndListForType(fetchType: String){
+    private fun setUpMapAndListForType(fetchType: SectionType){
         getAllShoptivitiesInteractor.executeForType(fetchType,
                 object : SuccessCompletion<Shoptivities> {
                     override fun successCompletion(shoptivities: Shoptivities) {

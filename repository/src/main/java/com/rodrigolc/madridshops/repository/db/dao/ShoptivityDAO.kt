@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import com.rodrigolc.madridshops.repository.db.DBConstants
 import com.rodrigolc.madridshops.repository.db.DBHelper
 import com.rodrigolc.madridshops.repository.model.ShoptivityEntity
+import com.rodrigolc.madridshops.utils.SectionType
 
 internal class ShoptivityDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityEntity>{
 
@@ -70,13 +71,13 @@ internal class ShoptivityDAO(val dbHelper: DBHelper): DAOPersistable<ShoptivityE
         return queryResult
     }
 
-    override fun queryType(type: String): List<ShoptivityEntity> {
+    override fun queryType(type: SectionType): List<ShoptivityEntity> {
         val queryResult = ArrayList<ShoptivityEntity>()
 
         val cursor = dbReadOnlyConnection.query(DBConstants.TABLE_SHOPTIVITIES,
                 DBConstants.ALL_COLUMNS,
                 DBConstants.KEY_SHOPTIVITY_TYPE + " = ?",
-                arrayOf(type),
+                arrayOf(type.type),
                 "",
                 "",
                 DBConstants.KEY_SHOPTIVITY_NAME)

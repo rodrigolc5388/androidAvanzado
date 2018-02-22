@@ -6,6 +6,7 @@ import com.rodrigolc.madridshops.activity.HomeActivity
 import com.rodrigolc.madridshops.activity.MainActivity
 import com.rodrigolc.madridshops.activity.PicassoActivity
 import com.rodrigolc.madridshops.domain.model.Shoptivity
+import com.rodrigolc.madridshops.utils.SectionType
 
 class Router {
     fun navigateFromMainActivityToPicassoActivity(main: MainActivity){
@@ -17,7 +18,7 @@ class Router {
         main.startActivity(intent)
     }
 
-    fun navigateFromHomeActivityToMainActivity(home: HomeActivity, section: String){
+    fun navigateFromHomeActivityToMainActivity(home: HomeActivity, section: SectionType){
         val intent = MainActivity.intent(home.baseContext, section)
         home.startActivity(intent)
     }

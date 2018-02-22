@@ -14,6 +14,7 @@ import com.rodrigolc.madridshops.domain.interactor.internetstatus.InternetStatus
 import com.rodrigolc.madridshops.domain.model.Shoptivities
 import com.rodrigolc.madridshops.fragment.HomeFragment
 import com.rodrigolc.madridshops.router.Router
+import com.rodrigolc.madridshops.utils.SectionType
 import kotlinx.android.synthetic.main.activity_home.*
 
 
@@ -76,5 +77,5 @@ class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener 
     }
 
     // Fragment listener method to receive section's button touched
-    override fun onSelectedSection(section: String) = Router().navigateFromHomeActivityToMainActivity(this, section)
+    override fun onSelectedSection(section: SectionType) = Router().navigateFromHomeActivityToMainActivity(this, section)
 }

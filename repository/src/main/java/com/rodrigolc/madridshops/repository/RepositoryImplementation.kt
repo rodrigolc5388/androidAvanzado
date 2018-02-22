@@ -9,6 +9,7 @@ import com.rodrigolc.madridshops.repository.model.ShoptivityEntity
 import com.rodrigolc.madridshops.repository.network.GetJsonManager
 import com.rodrigolc.madridshops.repository.network.GetJsonManagerVolleyImpl
 import com.rodrigolc.madridshops.repository.network.json.JsonEntitiesParser
+import com.rodrigolc.madridshops.utils.SectionType
 import madridshops.rodrigolc.com.repository.BuildConfig
 import java.lang.ref.WeakReference
 
@@ -33,7 +34,7 @@ class RepositoryImpl(context: Context): Repository {
         })
     }
 
-    override fun getAllShoptivitiesForType(type: String, success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
+    override fun getAllShoptivitiesForType(type: SectionType, success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
 
         cache.getAllShoptivitiesForType(type, success = {
             success(it)

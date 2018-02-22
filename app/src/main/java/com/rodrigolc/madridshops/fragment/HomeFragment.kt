@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.rodrigolc.madridshops.R
+import com.rodrigolc.madridshops.utils.SectionType
 
 
 class HomeFragment : android.app.Fragment() {
@@ -33,17 +34,17 @@ class HomeFragment : android.app.Fragment() {
 
             shopsButton = root.findViewById(R.id.shops_button)
             shopsButton.setImageResource(R.drawable.shops_logo)
-            setButtonListener(shopsButton, getString(R.string.shop_section_string))
+            setButtonListener(shopsButton, SectionType.SHOP)
 
             activitiesButton = root.findViewById(R.id.activities_button)
             activitiesButton.setImageResource(R.drawable.activites_logo)
-            setButtonListener(activitiesButton, getString(R.string.activity_section_string))
+            setButtonListener(activitiesButton, SectionType.ACTIVITY)
         }
 
         return root
     }
 
-    fun setButtonListener(button: ImageView, section: String){
+    fun setButtonListener(button: ImageView, section: SectionType){
         button.setOnClickListener{
             onSelectedSectionListener?.onSelectedSection(section)
         }
@@ -72,7 +73,7 @@ class HomeFragment : android.app.Fragment() {
     }
 
     interface OnSelectedSectionListener {
-        fun onSelectedSection(section: String)
+        fun onSelectedSection(section: SectionType)
     }
 
 }
