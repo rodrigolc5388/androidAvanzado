@@ -13,6 +13,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/app_background_grey"
         tools:context=".activity.DetailActivity">
 
         <ImageView
@@ -74,15 +75,16 @@
             android:id="@+id/fragment_detail_map_image"
             android:layout_width="0dp"
             android:layout_height="150dp"
-            android:layout_marginBottom="@dimen/margin_top_bottom"
-            android:layout_marginEnd="@dimen/margin_sides"
             android:layout_marginStart="@dimen/margin_sides"
+            android:layout_marginEnd="@dimen/margin_sides"
             android:layout_marginTop="@dimen/margin_top_bottom"
+            android:layout_marginBottom="20dp"
             android:contentDescription="@string/shoptivity_static_map_image"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_detail_address" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_detail_address"
+            />
 
 
 

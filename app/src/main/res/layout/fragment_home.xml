@@ -6,14 +6,15 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.HomeActivity">
+    tools:context=".activity.HomeActivity"
+    android:background="@color/app_background_grey">
 
     <ImageView
         android:id="@+id/shops_button"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/margin_sides"
-        android:scaleType="centerCrop"
+        android:scaleType="centerInside"
         android:layout_weight="1"/>
 
     <ImageView
@@ -21,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/margin_sides"
-        android:scaleType="centerCrop"
+        android:scaleType="centerInside"
         android:layout_weight="1"/>
 
 </LinearLayout>

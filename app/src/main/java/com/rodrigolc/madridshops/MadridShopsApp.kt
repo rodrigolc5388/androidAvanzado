@@ -12,6 +12,7 @@ class MadridShopsApp: MultiDexApplication() {
         Log.d("MadridShopsApp", "onCreate")
     }
 
+
     override fun onLowMemory() {
         super.onLowMemory()
     }
