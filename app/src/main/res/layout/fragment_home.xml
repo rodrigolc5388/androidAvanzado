@@ -12,7 +12,7 @@
         android:id="@+id/shops_button"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
+        android:layout_margin="@dimen/margin_sides"
         android:scaleType="centerCrop"
         android:layout_weight="1"/>
 
@@ -20,7 +20,7 @@
         android:id="@+id/activities_button"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
+        android:layout_margin="@dimen/margin_sides"
         android:scaleType="centerCrop"
         android:layout_weight="1"/>
 

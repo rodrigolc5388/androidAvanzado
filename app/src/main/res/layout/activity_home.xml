@@ -16,8 +16,8 @@
         style="@style/AVLoadingIndicatorView.Small"
         app:indicatorName="BallScaleMultipleIndicator"
         app:indicatorColor="@color/my_blue"
-        app:maxHeight="50dp"
-        app:maxWidth="50dp"
+        app:maxHeight="@dimen/size_resource_50dp"
+        app:maxWidth="@dimen/size_resource_50dp"
         />
 
     <FrameLayout

@@ -16,7 +16,6 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
         android:layout_weight="1"
         />
 
@@ -25,7 +24,6 @@
         android:name="com.rodrigolc.madridshops.fragment.ListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorAccent"
         android:layout_weight="1"
         />
 

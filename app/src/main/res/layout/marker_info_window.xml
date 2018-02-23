@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/info_window_image"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="@dimen/logo_width_80dp"
+        android:layout_height="@dimen/logo_height_80dp"
         android:scaleType="centerCrop"
         tools:src="@drawable/ic_launcher_background"/>
     
@@ -21,9 +21,9 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/info_window_image"
         android:layout_alignParentTop="true"
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp"
-        android:textSize="20sp"
+        android:paddingStart="@dimen/padding_5dp"
+        android:paddingEnd="@dimen/padding_5dp"
+        android:textSize="@dimen/text_size_20dp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
         tools:text="CELL TITLE"/>
@@ -35,10 +35,10 @@
         android:layout_toEndOf="@id/info_window_image"
         android:layout_below="@id/info_window_title"
         android:maxLines="2"
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp"
-        android:paddingTop="5dp"
-        android:textSize="15sp"
+        android:paddingStart="@dimen/padding_5dp"
+        android:paddingEnd="@dimen/padding_5dp"
+        android:paddingTop="@dimen/padding_5dp"
+        android:textSize="@dimen/text_size_15dp"
         android:textStyle="italic"
         android:textColor="@android:color/darker_gray"
         tools:text="CELL SUBTITLE"/>

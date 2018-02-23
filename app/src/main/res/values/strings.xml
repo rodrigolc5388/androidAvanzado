@@ -10,4 +10,6 @@
     <string name="snackbar_mesagge_es">No hay conexión a internet. Por favor, resuelva el problema e inténtelo de nuevo</string>
     <string name="snackbar_cancelButton_en">Use cached data</string>
     <string name="snackbar_cancelButton_es">Usar caché</string>
+    <string name="shoptivity_detail_image">Shoptivity Detail image</string>
+    <string name="shoptivity_static_map_image">Shoptivity static map image</string>
 </resources>
