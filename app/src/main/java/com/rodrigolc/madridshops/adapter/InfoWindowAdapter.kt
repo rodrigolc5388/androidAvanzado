@@ -9,6 +9,7 @@ import com.rodrigolc.madridshops.R
 import com.rodrigolc.madridshops.domain.model.Shoptivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.marker_info_window.view.*
+import java.util.*
 
 
 class InfoWindowAdapter(val context: Context): GoogleMap.InfoWindowAdapter{
@@ -20,24 +21,18 @@ class InfoWindowAdapter(val context: Context): GoogleMap.InfoWindowAdapter{
         val image = infoWinView.info_window_image
 
         infoWinView.info_window_title.text = shoptivity.name
-        infoWinView.info_window_subtitle.text = shoptivity.openingHours
+        when (Locale.getDefault().getLanguage()){
+            "es" -> {
+                infoWinView.info_window_subtitle.text = shoptivity.openingHours_es
+            }
+            else ->  {
+                infoWinView.info_window_subtitle.text = shoptivity.openingHours_en
+            }
+        }
 
         Picasso.with(context)
                 .load(shoptivity.logo)
                 .into(image, InfoWindowAdapterCallback(context, shoptivity.logo, image, m))
-
-        /*if(detailShoptivity.type == "shop"){
-            infoWinView.info_window_title.text = detailShoptivity.name
-            infoWinView.info_window_subtitle.text = detailShoptivity.openingHours
-
-            Picasso.with(context).load(detailShoptivity.image).into(image)
-
-        } else if (detailShoptivity.type == "activity"){
-            infoWinView.info_window_title.text = detailShoptivity.name
-            infoWinView.info_window_subtitle.text = detailShoptivity.openingHours
-            Picasso.with(context).load(detailShoptivity.image).into(image)
-        }*/
-
 
         return infoWinView
     }

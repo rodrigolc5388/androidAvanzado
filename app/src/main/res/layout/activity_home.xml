@@ -15,7 +15,7 @@
         android:layout_gravity="center"
         style="@style/AVLoadingIndicatorView.Small"
         app:indicatorName="BallScaleMultipleIndicator"
-        app:indicatorColor="@color/colorAccent"
+        app:indicatorColor="@color/my_blue"
         app:maxHeight="50dp"
         app:maxWidth="50dp"
         />

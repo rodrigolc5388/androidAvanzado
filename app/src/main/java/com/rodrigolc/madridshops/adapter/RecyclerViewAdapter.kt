@@ -10,6 +10,7 @@ import com.rodrigolc.madridshops.R
 import com.rodrigolc.madridshops.domain.model.Shoptivities
 import com.rodrigolc.madridshops.domain.model.Shoptivity
 import com.squareup.picasso.Picasso
+import java.util.*
 
 class RecyclerViewAdapter(val shoptivities: Shoptivities?): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
@@ -40,7 +41,14 @@ class RecyclerViewAdapter(val shoptivities: Shoptivities?): RecyclerView.Adapter
         fun bindPlate(shoptivity: Shoptivity) {
             val context = shoptivityLogo.context
             shoptivityName.text = shoptivity.name
-            shoptivityOpeningHours.text = shoptivity.openingHours
+            when (Locale.getDefault().getLanguage()){
+                "es" -> {
+                    shoptivityOpeningHours.text = shoptivity.openingHours_es
+                }
+                else ->  {
+                    shoptivityOpeningHours.text = shoptivity.openingHours_en
+                }
+            }
             // Cell image loading with Picasso
             Picasso.with(context).load(shoptivity.logo).into(shoptivityLogo)
         }

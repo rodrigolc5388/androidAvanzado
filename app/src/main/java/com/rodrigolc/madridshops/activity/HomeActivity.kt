@@ -56,11 +56,8 @@ class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener 
     private fun checkInternetConnection(){
         loadingView.smoothToShow()
         InternetStatusInteractorImpl().execute(this, success = {
-            //loadingView.smoothToShow()
             dataBaseTrigger()
-            //loadingView.smoothToHide()
         }, error = {
-            //loadingView.smoothToHide()
             AlertDialog.Builder(this)
 
                     .setTitle("No internet connection")

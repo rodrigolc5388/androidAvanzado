@@ -48,8 +48,11 @@ private fun entityMapper(list: List<ShoptivityEntity>): Shoptivities {
                 it.name,
                 it.address,
                 it.description_en,
-                it.img, it.logo,
+                it.description_es,
+                it.img,
+                it.logo,
                 it.openingHoursEn,
+                it.openingHoursEs,
                 parseStringToDouble(it.longitude),
                 parseStringToDouble(it.latitude),
                 it.type.toString())

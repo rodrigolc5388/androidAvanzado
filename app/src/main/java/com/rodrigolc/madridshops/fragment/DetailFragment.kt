@@ -9,6 +9,7 @@ import android.widget.TextView
 import com.rodrigolc.madridshops.R
 import com.rodrigolc.madridshops.domain.model.Shoptivity
 import com.squareup.picasso.Picasso
+import java.util.*
 
 
 class DetailFragment : android.app.Fragment() {
@@ -48,10 +49,17 @@ class DetailFragment : android.app.Fragment() {
             Picasso.with(activity).load(detailShoptivity.image).into(picture)
 
             description = root.findViewById(R.id.fragment_detail_description)
-            description.setText(detailShoptivity.description)
-
             openingHours = root.findViewById(R.id.fragment_detail_opening_hours)
-            openingHours.setText(detailShoptivity.openingHours)
+            when (Locale.getDefault().getLanguage()){
+                "es" -> {
+                    description.text = detailShoptivity.description_es
+                    openingHours.text = detailShoptivity.openingHours_es
+                }
+                else ->  {
+                    description.text = detailShoptivity.description_en
+                    openingHours.text = detailShoptivity.openingHours_en
+                }
+            }
 
             address = root.findViewById(R.id.fragment_detail_address)
             address.setText(detailShoptivity.address)
