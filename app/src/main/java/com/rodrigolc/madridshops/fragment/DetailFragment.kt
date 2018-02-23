@@ -65,7 +65,7 @@ class DetailFragment : android.app.Fragment() {
             address.setText(detailShoptivity.address)
 
             map = root.findViewById(R.id.fragment_detail_map_image)
-            val url = "http://maps.googleapis.com/maps/api/staticmap?center=${detailShoptivity.latitude.toString()},${detailShoptivity.longitude.toString()}&zoom=16&size=320x220&scale=2&markers=color:blue%7C${detailShoptivity.latitude.toString()},${detailShoptivity.longitude.toString()}\n"
+            val url = "http://maps.googleapis.com/maps/api/staticmap?center=${detailShoptivity.latitude.toString()},${detailShoptivity.longitude.toString()}&zoom=16&size=320x220&scale=2&markers=color:blue%7C${detailShoptivity.latitude.toString()},${detailShoptivity.longitude.toString()}"
             Picasso.with(activity).load(url).into(map)
         }
 

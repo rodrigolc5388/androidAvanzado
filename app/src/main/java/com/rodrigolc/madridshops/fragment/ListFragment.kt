@@ -48,8 +48,6 @@ class ListFragment: Fragment() {
             val position = shoptivitiesList.getChildAdapterPosition(v)
             val shoptivity = recylerViewShoptivities!!.get(position)
             onSelectedShoptivityListener?.onSelectedShoptivity(shoptivity)
-            // Tal vez haya que quitar este .finish()
-            //activity.finish()
         }
     }
 

@@ -45,6 +45,7 @@ class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListen
 
     private var map: GoogleMap? = null
     lateinit var listFragment: ListFragment
+
     val getAllShoptivitiesInteractor: GetAllShoptivitiesInteractor = GetAllShoptivitiesInteractorImplementation(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,21 +80,48 @@ class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListen
         mapFragment.getMapAsync({
             Log.d("SUCCESS", "HABEMUS MAPA")
 
-            centerMapInPosition(it, 40.416775, -3.703790)
+            map = it
+
             it.uiSettings.isRotateGesturesEnabled = false
             it.uiSettings.isZoomControlsEnabled = true
+
+            centerMapInPosition(it, 40.416775, -3.703790)
             showUserPosition(baseContext, it)
-            map = it
             addAllPins(shoptivities)
+
             it.setInfoWindowAdapter(InfoWindowAdapter(this))
             it.setOnInfoWindowClickListener(GoogleMap.OnInfoWindowClickListener {
                 val shoptivity: Shoptivity = it.tag as Shoptivity
                 Router().navigateFromMainActivityToDetailActivity(this, shoptivity)
-
             })
 
         })
     }
+
+
+    private fun initializeList(shoptivities: Shoptivities){
+        listFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment
+        listFragment.setShoptivities(shoptivities)
+    }
+
+
+    // Navigation to Shoptivity Detail View
+    override fun onSelectedShoptivity(shoptivity: Shoptivity) = Router().navigateFromMainActivityToDetailActivity(this, shoptivity)
+
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
+
+    // GoogleMap setUp
 
     fun centerMapInPosition(map: GoogleMap, latitude: Double, longitude: Double){
         val coordinate = LatLng(latitude, longitude)
@@ -105,6 +133,7 @@ class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListen
 
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
+
 
     fun showUserPosition(context: Context, map: GoogleMap){
         if(ActivityCompat.checkSelfPermission(context, ACCESS_FINE_LOCATION)
@@ -121,26 +150,6 @@ class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListen
     }
 
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 10){
-            try{
-            map?.isMyLocationEnabled = true
-            } catch (e: SecurityException){
-            }
-        }
-    }
-
-    fun addAllPins(shoptivities: Shoptivities){
-        for (i in 0 until shoptivities.count()){
-            val shop = shoptivities.get(i)
-            if(shop.latitude != null && shop.longitude != null) {
-                addPin(map!!, shop)
-            }
-
-        }
-    }
-
     fun addPin(map: GoogleMap, shoptivity: Shoptivity){
         map.addMarker(MarkerOptions()
                 .position(LatLng(shoptivity.latitude!!, shoptivity.longitude!!))
@@ -149,23 +158,23 @@ class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListen
     }
 
 
-    private fun initializeList(shoptivities: Shoptivities){
-        listFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment
-        listFragment.setShoptivities(shoptivities)
+    fun addAllPins(shoptivities: Shoptivities){
+        for (i in 0 until shoptivities.count()){
+            val shop = shoptivities.get(i)
+            if(shop.latitude != null && shop.longitude != null) {
+                addPin(map!!, shop)
+            }
+        }
     }
 
 
-    override fun onSelectedShoptivity(shoptivity: Shoptivity) = Router().navigateFromMainActivityToDetailActivity(this, shoptivity)
-
-
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            android.R.id.home -> {
-                finish()
-                true
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 10){
+            try{
+                map?.isMyLocationEnabled = true
+            } catch (e: SecurityException){
             }
         }
-        return super.onOptionsItemSelected(item)
     }
 }
