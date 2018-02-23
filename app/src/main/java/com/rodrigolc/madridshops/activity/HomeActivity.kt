@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
+import com.rodrigolc.madridshops.R
 import com.rodrigolc.madridshops.domain.interactor.ErrorCompletion
 import com.rodrigolc.madridshops.domain.interactor.SuccessCompletion
 import com.rodrigolc.madridshops.domain.interactor.getAllShops.GetAllShoptivitiesInteractor
@@ -16,6 +17,7 @@ import com.rodrigolc.madridshops.fragment.HomeFragment
 import com.rodrigolc.madridshops.router.Router
 import com.rodrigolc.madridshops.utils.SectionType
 import kotlinx.android.synthetic.main.activity_home.*
+import java.util.*
 
 
 class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener {
@@ -37,8 +39,6 @@ class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener 
     }
 
     private fun dataBaseTrigger() {
-        //loadingView.smoothToShow()
-
         getAllShoptivitiesInteractor.execute(object : SuccessCompletion<Shoptivities> {
             override fun successCompletion(shoptivities: Shoptivities) {
                 loadingView.smoothToHide()
@@ -59,14 +59,34 @@ class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener 
             dataBaseTrigger()
         }, error = {
             AlertDialog.Builder(this)
-
-                    .setTitle("No internet connection")
-                    .setMessage("There is no internet connection. Please solve the issue and try again.")
+                    .setTitle(when (Locale.getDefault().getLanguage()){
+                        "es" -> {
+                            getString(R.string.snackbar_title_es)
+                        }
+                        else ->  {
+                            getString(R.string.snackbar_title_en)
+                        }
+                    })
+                    .setMessage(when (Locale.getDefault().getLanguage()){
+                        "es" -> {
+                            getString(R.string.snackbar_mesagge_es)
+                        }
+                        else ->  {
+                            getString(R.string.snackbar_mesagge_en)
+                        }
+                    })
                     .setPositiveButton("Ok", {dialog, _ ->
                         dialog.dismiss()
                         this.finish()
                     })
-                    .setNegativeButton("Use cached data",{ dialog, _ ->
+                    .setNegativeButton(when (Locale.getDefault().language){
+                        "es" -> {
+                            getString(R.string.snackbar_cancelButton_es)
+                        }
+                        else -> {
+                            getString(R.string.snackbar_cancelButton_en)
+                        }
+                    },{ dialog, _ ->
                         dialog.dismiss()
                         dataBaseTrigger()
                     })

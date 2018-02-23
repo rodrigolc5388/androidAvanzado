@@ -45,7 +45,6 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-        <activity android:name=".activity.PicassoActivity"></activity>
         <activity android:name=".activity.DetailActivity"></activity>
         <activity android:name=".activity.HomeActivity">
             <intent-filter>
