@@ -12,9 +12,12 @@
         android:id="@+id/loadingView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
         style="@style/AVLoadingIndicatorView.Small"
-        app:indicatorName="BallPulseIndicator"
+        app:indicatorName="BallScaleMultipleIndicator"
         app:indicatorColor="@color/colorAccent"
+        app:maxHeight="50dp"
+        app:maxWidth="50dp"
         />
 
     <FrameLayout

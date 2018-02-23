@@ -37,16 +37,17 @@ class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener 
     }
 
     private fun dataBaseTrigger() {
+        //loadingView.smoothToShow()
 
         getAllShoptivitiesInteractor.execute(object : SuccessCompletion<Shoptivities> {
             override fun successCompletion(shoptivities: Shoptivities) {
-                //loadingView.smoothToHide()
+                loadingView.smoothToHide()
                 Log.d("MadridShops Data", "Data base loaded succesfully")
                 Log.d("CORIO HomeActivity", "" + shoptivities.count())
             }
         }, object : ErrorCompletion {
             override fun errorCompletion(errorMessage: String) {
-                //loadingView.smoothToHide()
+                loadingView.smoothToHide()
                 Toast.makeText(baseContext, "Error loading data", Toast.LENGTH_LONG).show()
             }
         })
@@ -55,10 +56,11 @@ class HomeActivity: AppCompatActivity(), HomeFragment.OnSelectedSectionListener 
     private fun checkInternetConnection(){
         loadingView.smoothToShow()
         InternetStatusInteractorImpl().execute(this, success = {
+            //loadingView.smoothToShow()
             dataBaseTrigger()
-            loadingView.smoothToHide()
+            //loadingView.smoothToHide()
         }, error = {
-            loadingView.smoothToHide()
+            //loadingView.smoothToHide()
             AlertDialog.Builder(this)
 
                     .setTitle("No internet connection")
