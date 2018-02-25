@@ -108,13 +108,13 @@ Each one will take the user to the selected section of the app.
 
 ### Landscape Demo
 
-![Alt Text](androidAvanzado/Landscape-demo.gif)
+![Alt Text](https://github.com/rodrigolc5388/androidAvanzado/blob/practica/Landscape-demo.gif)
 
 <br>
 
 ### Portrait Demo
 
-![Alt Text](androidAvanzado/Portrait-demo.gif)
+![Alt Text](https://github.com/rodrigolc5388/androidAvanzado/blob/practica/Portrait-demo.gif)
 
 
 
