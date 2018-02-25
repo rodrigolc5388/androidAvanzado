@@ -56,6 +56,13 @@ class MapAndListActivity : AppCompatActivity(), ListFragment.OnSelectedShoptivit
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val type = intent.getSerializableExtra(EXTRA_TYPE) as SectionType
+
+        if (type == SectionType.SHOP){
+            supportActionBar?.title = "Madrid Shops"
+        } else if(type == SectionType.ACTIVITY){
+            supportActionBar?.title = "Madrid Activities"
+        }
+
         setUpMapAndListForType(type)
 
     }

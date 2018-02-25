@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MadridShops</string>
+    <string name="app_name">MADridLife</string>
     <string name="snackbar_title_en">No internet connection</string>
     <string name="snackbar_mesagge_en">There is no internet connection. Please solve the issue and try again.</string>
     <string name="snackbar_cancelButton_en">Use cached data</string>
