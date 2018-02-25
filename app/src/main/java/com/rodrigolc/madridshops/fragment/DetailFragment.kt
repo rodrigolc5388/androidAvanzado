@@ -1,5 +1,7 @@
 package com.rodrigolc.madridshops.fragment
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -67,6 +69,14 @@ class DetailFragment : android.app.Fragment() {
             map = root.findViewById(R.id.fragment_detail_map_image)
             val url = "http://maps.googleapis.com/maps/api/staticmap?center=${detailShoptivity.latitude.toString()},${detailShoptivity.longitude.toString()}&zoom=16&size=320x220&scale=2&markers=color:blue%7C${detailShoptivity.latitude.toString()},${detailShoptivity.longitude.toString()}"
             Picasso.with(activity).load(url).into(map)
+            map.setOnClickListener(View.OnClickListener {
+
+                val uri = Uri.parse("geo:${detailShoptivity.latitude.toString()},${detailShoptivity.longitude.toString()}?z=19")
+                val uri2 = Uri.parse("google.navigation:q=${detailShoptivity.latitude.toString()},${detailShoptivity.longitude.toString()}&mode=w")
+                val mapIntent = Intent(Intent.ACTION_VIEW, uri2)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                startActivity(mapIntent)
+            })
         }
 
         return root
