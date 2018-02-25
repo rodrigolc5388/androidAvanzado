@@ -29,7 +29,7 @@ import com.rodrigolc.madridshops.domain.model.Shoptivity
 import com.rodrigolc.madridshops.fragment.ListFragment
 import com.rodrigolc.madridshops.router.Router
 import com.rodrigolc.madridshops.utils.SectionType
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_map_and_list.*
 
 class MapAndListActivity : AppCompatActivity(), ListFragment.OnSelectedShoptivityListener {
 
@@ -50,7 +50,7 @@ class MapAndListActivity : AppCompatActivity(), ListFragment.OnSelectedShoptivit
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_map_and_list)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
