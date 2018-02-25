@@ -27,6 +27,7 @@ Shops and activities are shown in a map.
 - Repo: <http://square.github.io/picasso/>
 
 <br>
+
 ### AVLoadingIndicatorView
 - Library used in HomeActivity.  
 It provides an activity indicator, which shows while data is being downloaded from the net.  
@@ -75,6 +76,7 @@ Otherwise, texts will always be displayed in English.
 Each one will take the user to the selected section of the app.
 
 <br>
+
 ### MapAndListActivity
 - Contains two parts:
 
@@ -92,15 +94,16 @@ Each one will take the user to the selected section of the app.
 - Cells are touchable; when the user touchs one, app will navigate to Shop/Activity's DetailView.
 
 <br>
+
 ### DetailActivity
 - Shows a Shop/Activity's DetailView.
 - This activity contains Shop/Activity's: image, description, opening hours, address and a map static image.
 - Map's static image shows a marker with Shop/Activity's exact location.  
 - Map's static image is also touchable, so when the user touchs it, GoogleMaps app will launch and provide user turn-by-turn navigation to the Shop/Activity's location by walking.
 
+<br> 
 
 
-<br>
 
 
 
