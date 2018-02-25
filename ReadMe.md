@@ -5,9 +5,12 @@
 
 <br>
 
+
+
 ## Synopsis
 Create a mobile application to display information of shops and activities in Madrid, even when the user has no Internet connection.
-Shops and activities are shown in a map.
+Shops and activities are shown in a map.  
+### (App developed in branch "practica")
 
 <br>
 
@@ -102,6 +105,17 @@ Each one will take the user to the selected section of the app.
 - Map's static image is also touchable, so when the user touchs it, GoogleMaps app will launch and provide user turn-by-turn navigation to the Shop/Activity's location by walking.
 
 <br> 
+
+### Landscape Demo
+
+![Alt Text](androidAvanzado/Landscape-demo.gif)
+
+<br>
+
+### Portrait Demo
+
+![Alt Text](androidAvanzado/Portrait-demo.gif)
+
 
 
 
