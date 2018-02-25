@@ -155,7 +155,11 @@ class MapAndListActivity : AppCompatActivity(), ListFragment.OnSelectedShoptivit
         map.addMarker(MarkerOptions()
                 .position(LatLng(shoptivity.latitude!!, shoptivity.longitude!!))
                 .title(shoptivity.name)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.activity_marker_icon)))
+                .icon(BitmapDescriptorFactory.fromResource(when(shoptivity.type){
+                    "shop" -> R.drawable.shop_marker_icon
+                    "activity" -> R.drawable.activity_marker_icon
+                    else -> Log.d("Error", "Custom marker icon not found")
+                })))
                 .tag = shoptivity
 
 
