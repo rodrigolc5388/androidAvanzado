@@ -94,6 +94,7 @@ class MapAndListActivity : AppCompatActivity(), ListFragment.OnSelectedShoptivit
             it.setOnInfoWindowClickListener(GoogleMap.OnInfoWindowClickListener {
                 val shoptivity: Shoptivity = it.tag as Shoptivity
                 Router().navigateFromMainActivityToDetailActivity(this, shoptivity)
+                it.isVisible = false
             })
 
         })
