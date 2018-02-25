@@ -71,9 +71,8 @@ class DetailFragment : android.app.Fragment() {
             Picasso.with(activity).load(url).into(map)
             map.setOnClickListener(View.OnClickListener {
 
-                val uri = Uri.parse("geo:${detailShoptivity.latitude.toString()},${detailShoptivity.longitude.toString()}?z=19")
-                val uri2 = Uri.parse("google.navigation:q=${detailShoptivity.latitude.toString()},${detailShoptivity.longitude.toString()}&mode=w")
-                val mapIntent = Intent(Intent.ACTION_VIEW, uri2)
+                val uri = Uri.parse("google.navigation:q=${detailShoptivity.latitude.toString()},${detailShoptivity.longitude.toString()}&mode=w")
+                val mapIntent = Intent(Intent.ACTION_VIEW, uri)
                 mapIntent.setPackage("com.google.android.apps.maps")
                 startActivity(mapIntent)
             })
