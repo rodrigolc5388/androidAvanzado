@@ -31,13 +31,13 @@ import com.rodrigolc.madridshops.router.Router
 import com.rodrigolc.madridshops.utils.SectionType
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity: AppCompatActivity(), ListFragment.OnSelectedShoptivityListener {
+class MapAndListActivity : AppCompatActivity(), ListFragment.OnSelectedShoptivityListener {
 
     companion object {
         private val EXTRA_TYPE = "EXTRA_TYPE"
 
         fun intent(context: Context, type: SectionType): Intent{
-            val intent = Intent(context, MainActivity::class.java)
+            val intent = Intent(context, MapAndListActivity::class.java)
             intent.putExtra(EXTRA_TYPE, type)
             return intent
         }
