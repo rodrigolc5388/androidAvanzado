@@ -10,7 +10,6 @@
 ## Synopsis
 Create a mobile application to display information of shops and activities in Madrid, even when the user has no Internet connection.
 Shops and activities are shown in a map.  
-### (App developed in branch "practica")
 
 <br>
 
