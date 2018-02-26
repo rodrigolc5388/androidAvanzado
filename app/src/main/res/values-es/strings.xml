@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MADridLife</string>
+    <string name="snackbar_title_es">No hay conexión a la red</string>
+    <string name="snackbar_mesagge_es">No hay conexión a internet. Por favor, resuelva el problema e inténtelo de nuevo</string>
+    <string name="snackbar_cancelButton_es">Usar caché</string>
+</resources>

@@ -1,8 +1,8 @@
 package com.rodrigolc.madridshops
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException
-import com.rodrigolc.madridshops.repository.model.ShopEntity
-import com.rodrigolc.madridshops.repository.model.ShopsResponseEntity
+import com.rodrigolc.madridshops.repository.model.ShoptivityEntity
+import com.rodrigolc.madridshops.repository.model.ShoptivitiesResponseEntity
 import com.rodrigolc.madridshops.repository.network.json.JsonEntitiesParser
 import com.rodrigolc.madridshops.util.ReadJsonFile
 import org.junit.Assert.*
@@ -16,7 +16,7 @@ class JSONParsingTests {
         assertTrue(false == shopsJson.isEmpty())
 
         val parser = JsonEntitiesParser()
-        val shop = parser.parse<ShopEntity>(shopsJson)
+        val shop = parser.parse<ShoptivityEntity>(shopsJson)
 
         assertNotNull(shop)
         assertEquals("Cortefiel - Preciados", shop.name)
@@ -31,15 +31,15 @@ class JSONParsingTests {
         // parsing
 
         val parser = JsonEntitiesParser()
-        var shop: ShopEntity
+        var shoptivity: ShoptivityEntity
         try {
-            shop = parser.parse<ShopEntity>(shopsJson)
+            shoptivity = parser.parse<ShoptivityEntity>(shopsJson)
         } catch (e: InvalidFormatException) {
-            shop = ShopEntity(1,1,"Parsing failed","", 10f.toString(), 11f.toString(), "", "", "", "")
+            shoptivity = ShoptivityEntity(1,1,"Parsing failed","", 10f.toString(), 11f.toString(), "", "", "", "")
         }
-        assertNotNull(shop)
-        assertEquals("Parsing failed", shop.name)
-        assertEquals(10f, shop.latitude.toFloat(), 0.1f)
+        assertNotNull(shoptivity)
+        assertEquals("Parsing failed", shoptivity.name)
+        assertEquals(10f, shoptivity.latitude.toFloat(), 0.1f)
     }
 
 
@@ -51,7 +51,7 @@ class JSONParsingTests {
         assertTrue(false == shopsJson.isEmpty())
 
         val parser = JsonEntitiesParser()
-        val responseEntity = parser.parse<ShopsResponseEntity>(shopsJson)
+        val responseEntity = parser.parse<ShoptivitiesResponseEntity>(shopsJson)
 
         assertNotNull(responseEntity)
         assertEquals(6, responseEntity.result.count())

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    >
+
+    <ImageView
+        android:id="@+id/cell_image"
+        android:layout_width="@dimen/logo_width_80dp"
+        android:layout_height="@dimen/logo_height_80dp"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/ic_launcher_background"/>
+    
+    <TextView
+        android:id="@+id/cell_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/cell_image"
+        android:layout_alignParentTop="true"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:textSize="@dimen/text_size_20dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        tools:text="CELL TITLE"/>
+
+    <TextView
+        android:id="@+id/cell_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/cell_image"
+        android:layout_below="@id/cell_title"
+        android:maxLines="2"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:paddingTop="@dimen/padding_5dp"
+        android:textSize="@dimen/text_size_15dp"
+        android:textStyle="italic"
+        android:textColor="@android:color/darker_gray"
+        tools:text="CELL SUBTITLE"/>
+
+</RelativeLayout>

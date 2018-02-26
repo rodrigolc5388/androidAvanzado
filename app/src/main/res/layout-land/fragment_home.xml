@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.HomeActivity"
+    android:background="@color/app_background_grey">
+
+    <ImageView
+        android:id="@+id/shops_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_sides"
+        android:scaleType="centerInside"
+        android:layout_weight="1"/>
+
+    <ImageView
+        android:id="@+id/activities_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_sides"
+        android:scaleType="centerInside"
+        android:layout_weight="1"/>
+
+</LinearLayout>

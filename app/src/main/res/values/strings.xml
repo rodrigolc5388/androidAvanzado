@@ -1,7 +1,15 @@
 <resources>
-    <string name="app_name">MadridShops</string>
+    <string name="app_name">MADridLife</string>
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="shop_section_string">shop</string>
+    <string name="activity_section_string">activity</string>
+    <string name="snackbar_title_en">No internet connection</string>
+    <string name="snackbar_title_es">No hay conexión a la red</string>
+    <string name="snackbar_mesagge_en">There is no internet connection. Please solve the issue and try again.</string>
+    <string name="snackbar_mesagge_es">No hay conexión a internet. Por favor, resuelva el problema e inténtelo de nuevo</string>
+    <string name="snackbar_cancelButton_en">Use cached data</string>
+    <string name="snackbar_cancelButton_es">Usar caché</string>
+    <string name="shoptivity_detail_image">Shoptivity Detail image</string>
+    <string name="shoptivity_static_map_image">Shoptivity static map image</string>
 </resources>

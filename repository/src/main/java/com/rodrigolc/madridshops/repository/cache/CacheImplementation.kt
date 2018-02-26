@@ -3,55 +3,76 @@ package com.rodrigolc.madridshops.repository.cache
 import android.content.Context
 import com.rodrigolc.madridshops.repository.db.DBHelper
 import com.rodrigolc.madridshops.repository.db.buildDBHelper
-import com.rodrigolc.madridshops.repository.db.dao.ShopDAO
-import com.rodrigolc.madridshops.repository.model.ShopEntity
+import com.rodrigolc.madridshops.repository.db.dao.ShoptivityDAO
+import com.rodrigolc.madridshops.repository.model.ShoptivityEntity
 import com.rodrigolc.madridshops.repository.thread.DispatchOnMainThreadRun
+import com.rodrigolc.madridshops.utils.SectionType
 import java.lang.ref.WeakReference
 
 
 internal class CacheImpl(context: Context): Cache {
-
     val context = WeakReference<Context>(context)
+    val ddbb = cacheDBHelper()
 
-    override fun getAllShops(success: (shops: List<ShopEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
+    override fun getAllShoptivities(success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
         Thread(Runnable {
-            var shops = ShopDAO(cacheDBHelper()).query()
+            var shoptivities = ShoptivityDAO(ddbb).query()
             DispatchOnMainThreadRun(Runnable {
-                if (shops.count() > 0) {
-                    success(shops)
+                if (shoptivities.count() > 0) {
+                    ddbb.close()
+                    success(shoptivities)
                 } else {
-                    error("No shops")
+                    ddbb.close()
+                    error("No shoptivities")
                 }
             })
         }).run()
     }
 
-    override fun saveAllShops(shops: List<ShopEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit) {
+    override fun getAllShoptivitiesForType(type: SectionType, success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
+        Thread(Runnable {
+            var shoptivities = ShoptivityDAO(ddbb).queryType(type)
+            DispatchOnMainThreadRun(Runnable {
+                if (shoptivities.count() > 0) {
+                    ddbb.close()
+                    success(shoptivities)
+                } else {
+                    ddbb.close()
+                    error("No shoptivities")
+                }
+            })
+        }).run()
+    }
+
+    override fun saveAllShoptivities(type: SectionType, shoptivities: List<ShoptivityEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit) {
         Thread(Runnable {
             try {
-                shops.forEach { ShopDAO(cacheDBHelper()).insert(it) }
+                shoptivities.forEach { ShoptivityDAO(ddbb).insert(type, it) }
 
                 DispatchOnMainThreadRun(Runnable {
+                    ddbb.close()
                     success()
                 })
             } catch(e: Exception) {
                 DispatchOnMainThreadRun(Runnable {
-                        error("Error inserting shops")
+                    ddbb.close()
+                        error("Error saving/inserting shoptivities")
                 })
             }
 
         }).run()
     }
 
-
-
-    override fun deleteAllShops(success: () -> Unit, error: (errorMessage: String) -> Unit) {
+    
+    override fun deleteAllShoptivities(success: () -> Unit, error: (errorMessage: String) -> Unit) {
         Thread(Runnable {
-            var successDeleting = ShopDAO(cacheDBHelper()).deleteAll()
+            var successDeleting = ShoptivityDAO(ddbb).deleteAll()
             DispatchOnMainThreadRun(Runnable {
                 if (successDeleting) {
+                    ddbb.close()
                     success()
                 } else {
+                    ddbb.close()
                     error("Error deleting")
                 }
             })
@@ -59,6 +80,6 @@ internal class CacheImpl(context: Context): Cache {
     }
 
     private fun cacheDBHelper(): DBHelper {
-        return buildDBHelper(context.get()!!, "MadridShops.sqlite", 1)
+        return buildDBHelper(context.get()!!, "MadridLife.sqlite", 1)
     }
 }

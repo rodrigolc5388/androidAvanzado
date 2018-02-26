@@ -25,7 +25,7 @@
     <application
         android:name=".MadridShopsApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -40,16 +40,20 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.MapAndListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity android:name=".activity.DetailActivity"></activity>
+        <activity android:name=".activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".activity.PicassoActivity"></activity>
     </application>
 
 </manifest>

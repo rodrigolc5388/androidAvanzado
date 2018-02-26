@@ -1,3 +1,12 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="size_resource_50dp">50dp</dimen>
+    <dimen name="margin_top_bottom">40dp</dimen>
+    <dimen name="margin_sides">20dp</dimen>
+    <dimen name="logo_width_80dp">80dp</dimen>
+    <dimen name="logo_height_80dp">80dp</dimen>
+    <dimen name="padding_5dp">5dp</dimen>
+    <dimen name="text_size_20dp">20sp</dimen>
+    <dimen name="text_size_15dp">15sp</dimen>
+    <dimen name="padding_10dp">10dp</dimen>
 </resources>
