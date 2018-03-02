@@ -40,7 +40,7 @@ class RepositoryImpl(context: Context): Repository {
         cache.getAllShoptivitiesForType(type, success = {
             success(it)
         }, error = {
-            error("Error getting Shoptivities of type: " + type)
+            error("Error getting Shoptivities for type: " + type)
         })
     }
 
@@ -51,30 +51,36 @@ class RepositoryImpl(context: Context): Repository {
 
     private fun populateCache(type: SectionType, success: (shoptivities: List<ShoptivityEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
 
-        var url = ""
-        if (type == SectionType.SHOP){
+        var url : String = when(type){
+            SectionType.SHOP -> BuildConfig.MADRID_SHOPS_SERVER_URL
+            SectionType.ACTIVITY -> BuildConfig.MADRID_ACTIVITIES_SERVER_URL
+        }
+
+
+        /*if (type == SectionType.SHOP){
             url = BuildConfig.MADRID_SHOPS_SERVER_URL
         } else if (type == SectionType.ACTIVITY){
             url = BuildConfig.MADRID_ACTIVITIES_SERVER_URL
-        }
+        }*/
 
 
         jsonManager.execute(url,
                 success = object : SuccessCompletion<String> {
                     override fun successCompletion(e: String) {
                         val parser = JsonEntitiesParser()
-                        var activitiesResponseEntity: ShoptivitiesResponseEntity
+                        val shoptivitiesResponse: ShoptivitiesResponseEntity
+
                         try {
-                            activitiesResponseEntity = parser.parse<ShoptivitiesResponseEntity>(e)
+                            shoptivitiesResponse = parser.parse<ShoptivitiesResponseEntity>(e)
                         } catch (e: InvalidFormatException) {
-                            error("ERROR PARSING ACTIVITIES")
+                            error("ERROR PARSING SHOPTIVITIES")
                             return
                         }
                         // store result in cache
-                        cache.saveAllShoptivities(type, activitiesResponseEntity.result, success = {
-                            success(activitiesResponseEntity.result)
+                        cache.saveAllShoptivities(type, shoptivitiesResponse.result, success = {
+                            success(shoptivitiesResponse.result)
                         }, error = {
-                            error("Something happened on the way to Activities heaven!")
+                            error("Something happened on the way to Shoptivities heaven!")
                         })
                     }
                 }, error = object : ErrorCompletion {
